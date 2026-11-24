@@ -2,150 +2,155 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smart Energy Saver | مساعد التوفير والنصائح</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Energy Saver | موفر الطاقة الذكي</title>
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
-body{margin:0;background:#f6f7fb;color:#111827}
-header{background:linear-gradient(135deg,#0f172a,#1e3a8a,#0ea5e9);color:#fff;padding:30px 16px;text-align:center;border-radius:0 0 28px 28px}
-header h1{font-size:32px;margin:6px 0}
-header h1 span{color:#facc15}
-header p{opacity:.9;font-size:15px;margin:0}
-header button{background:#facc15;color:#111827;border:0;padding:13px 28px;border-radius:999px;font-weight:900;font-size:16px;margin-top:16px;cursor:pointer}
-nav{background:#fff;position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:8px;padding:10px;box-shadow:0 4px 16px #00000012}
-nav a{text-decoration:none;color:#1e3a8a;font-weight:800;font-size:13px;background:#eff6ff;padding:8px 14px;border-radius:999px}
-main{max-width:980px;margin:auto;padding:16px 12px}
-.card{background:#fff;border-radius:22px;padding:22px;margin-bottom:16px;box-shadow:0 8px 24px #0000000d}
-.card h2{margin:0 0 12px;font-size:22px}
-label{display:block;font-weight:800;margin:14px 0 6px;font-size:14px}
-label small{color:#2563eb}
-input,select,textarea{width:100%;padding:13px;border:1.8px solid #e5e7eb;border-radius:12px;font-size:16px;background:#f9fafb;outline:none}
-input:focus,select:focus,textarea:focus{border-color:#2563eb;background:#fff}
-input[type=range]{padding:0;accent-color:#2563eb}
-button.main{border:0;border-radius:12px;padding:14px;background:#2563eb;color:#fff;font-size:16px;font-weight:800;width:100%;margin-top:14px;cursor:pointer}
-button.dark{background:#111827} button.green{background:#059669} button.gold{background:#facc15;color:#111827}
-.device{background:#f8fafc;padding:16px;border:1.5px solid #e5e7eb;border-radius:16px;margin:10px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.remove{background:#fff;color:#dc2626;border:1.5px solid #fecaca;width:100%;padding:9px;border-radius:10px;margin-top:10px;cursor:pointer}
-.result{background:linear-gradient(135deg,#111827,#1e3a8a);color:#fff;padding:18px;border-radius:16px;margin-top:14px;line-height:1.9}
-.kpis{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
-.kpi{background:#fff;color:#111827;padding:12px;border-radius:12px;text-align:center}
-.kpi strong{color:#1e3a8a;font-size:19px;display:block}
-.bar{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#2563eb)}
-.quick{display:flex;gap:8px;flex-wrap:wrap}
-.quick button{width:auto;padding:9px 14px;font-size:13px;background:#eff6ff;color:#1e3a8a;border:0;border-radius:999px;margin:0;cursor:pointer;font-weight:700}
-.ai-box{background:#f0fdf4;border:2px solid #bbf7d0;border-radius:14px;padding:16px;color:#111827;white-space:pre-wrap;line-height:2;font-size:16px}
-.formula{background:#0f172a;color:#fff;text-align:center;padding:14px;border-radius:12px;font-size:17px;font-weight:900;direction:ltr}
-.formula span{color:#facc15}
-.tips{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
-.tip{background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:14px;text-align:center;line-height:1.7;cursor:pointer}
-.tip div{font-size:30px}
-.big{font-size:32px;font-weight:900;color:#059669;text-align:center;margin:10px 0}
-footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
-@media(max-width:650px){.grid,.kpis,.tips{grid-template-columns:1fr 1fr}header h1{font-size:26px}}
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+body{margin:0;background:#0f172a;color:#fff}
+header{background:linear-gradient(135deg,#f59e0b,#f97316);padding:30px 20px;text-align:center;color:#fff}
+header h1{margin:0;font-size:32px}
+header p{opacity:.9}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:#1e293b;border-radius:16px;padding:20px;margin-bottom:20px;border:1px solid #334155}
+.card h2{color:#fbbf24;margin-top:0}
+input,button,textarea{width:100%;padding:12px;border-radius:10px;border:none;margin-top:10px;font-size:16px}
+input,textarea{background:#0f172a;color:#fff;border:1px solid #475569}
+button{background:#f59e0b;color:#000;font-weight:bold;cursor:pointer}
+button:hover{background:#fbbf24}
+#chatBox{background:#0f172a;border-radius:12px;padding:15px;min-height:180px;max-height:350px;overflow-y:auto;border:1px solid #334155}
+.msg{margin-bottom:12px;padding:10px 12px;border-radius:12px;line-height:1.7}
+.user{background:#f59e0b;color:#000;text-align:left}
+.ai{background:#1e293b;border:1px solid #475569}
+.badge{font-size:12px;color:#94a3b8}
+.small{font-size:13px;color:#94a3b8}
+.result{background:#065f46;padding:15px;border-radius:12px;margin-top:15px;font-weight:bold}
+footer{text-align:center;padding:20px;color:#94a3b8;font-size:13px}
 </style>
 </head>
 <body>
-<header><div style="font-size:50px">⚡</div><h1>Smart Energy <span>Saver</span></h1><p>جرّب بنفسك .. الفعل هو اللي بيتكلم 👇</p><button onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">جرّب الحاسبة الآن ↓</button></header>
-<nav><a href="#calc">🧮 الحاسبة</a><a href="#ai">🧠 مساعد التوفير</a><a href="#exp">🔬 جرّب التوفير</a><a href="#tips">💡 النصائح</a></nav>
-<main>
-<section class="card" id="calc">
-<h2>🧮 الحاسبة - جرّب بنفسك</h2>
-<div class="formula">kWh = <span>W × عدد × ساعات ÷ 1000</span></div>
-<div id="devices"></div>
-<button class="main dark" type="button" id="addBtn">+ جهاز جديد</button>
-<label>💰 سعر الكيلووات بالجنيه</label>
-<input id="price" type="number" value="2.5">
-<button class="main" id="calcBtn" type="button">احسب 📊</button>
-<div id="results" class="result" hidden>
-<h3 style="margin:0">📄 نتيجتك</h3>
-<div class="kpis" style="margin-top:10px">
-<div class="kpi">اليومي<br><strong id="daily"></strong></div>
-<div class="kpi">الشهري<br><strong id="monthly"></strong></div>
-<div class="kpi">التكلفة<br><strong id="cost"></strong></div>
-<div class="kpi">أكتر جهاز<br><strong id="biggest"></strong></div>
+
+<header>
+<h1>⚡ Smart Energy Saver</h1>
+<p>موفر الطاقة الذكي - وفر 50% من فاتورتك</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>🔢 حاسبة التوفير</h2>
+<p class="small">اكتب فاتورتك الحالية، وهنقولك هتوفر كام</p>
+<input type="number" id="bill" placeholder="اكتب فاتورتك بالجنيه، مثلا 1000">
+<button onclick="calc()">احسب التوفير 💰</button>
+<div id="calcResult"></div>
 </div>
-<p>💰 هتوفر: <strong id="saving" style="color:#facc15"></strong></p>
-<div id="chart"></div>
-<button class="main gold" onclick="window.print()">🖨️ طباعة</button>
+
+<div class="card">
+<h2>🤖 مساعد التوفير والنصائح - Gemini AI</h2>
+<p class="small">اسأل عن أي حاجة: سخان غاز، تكييف، لمبات، طاقة شمسية...</p>
+<div id="chatBox">
+<div class="msg ai">أهلا بيك! 👋 أنا مساعدك الذكي. اسألني: <b>ازاي أوفر 50% من فاتورتي؟</b> أو <b>ما هو السخان الغاز؟</b></div>
 </div>
-</section>
-<section class="card" id="ai" style="border:2px solid #059669">
-<h2>🧠 مساعد التوفير والنصائح</h2>
-<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">شغال عند الكل بـ <b>Gemini Flash</b> عن طريق OpenRouter - اسأله أي حاجة وهيرد عليك على طول، من غير ما تحط مفتاح.</p>
-<div class="quick">
-<button type="button" onclick="quickAsk('السخان الغاز اعمل فيه ايه؟')">🔥 سخان غاز</button>
-<button type="button" onclick="quickAsk('كيف أقلل استهلاك التكييف؟')">❄️ التكييف</button>
-<button type="button" onclick="quickAsk('فاتورتي عالية اعمل ايه؟')">💸 فاتورتي عالية</button>
-<button type="button" onclick="quickAsk('اشرحلي ازاي أوفر 50% من فاتورتي؟')">🚀 أوفر 50%</button>
+<input type="text" id="q" placeholder="اكتب سؤالك هنا... مثلا: ما هو السخان الغاز؟">
+<button onclick="askAI()">اسأل الذكاء الاصطناعي ✨</button>
+<p id="aiStatus" class="small"></p>
 </div>
-<label>اكتب سؤالك لمساعد التوفير والنصائح</label>
-<textarea id="question" rows="2" placeholder="مثال: اشرحلي ازاي أوفر 50% من فاتورتي؟"></textarea>
-<button class="main green" id="askBtn" type="button">اسأل مساعد التوفير والنصائح ✨</button>
-<div id="aiResult" hidden style="margin-top:14px"><p id="aiAnswer" class="ai-box"></p><p id="aiSource" style="font-size:12px;color:#6b7280"></p></div>
-</section>
-<section class="card" id="exp">
-<h2>🔬 جرّب التوفير بنفسك - حرّك وشوف</h2>
-<label>⚡ استهلاكك دلوقتي: <b id="beforeVal">300</b> ك.و.س</label>
-<input id="beforeRange" type="range" min="50" max="600" value="300">
-<label>🌱 بعد الترشيد: <b id="afterVal">210</b> ك.و.س</label>
-<input id="afterRange" type="range" min="20" max="600" value="210">
-<div class="big" id="liveSaving">وفرت 90 ك.و.س - 30%</div>
-<div class="bar" style="height:14px"><i id="liveBar" style="width:30%"></i></div>
-</section>
-<section class="card" id="tips">
-<h2>💡 دوس على أي نصيحة وشوف هتوفر كام</h2>
-<div class="tips">
-<div class="tip" onclick="showTip('❄️ التكييف على 24\nهتوفر 6% على كل درجة.\nلو قللته ساعتين هتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('💡 لمبة LED\nالعادية 60 وات، الليد 12 وات.\nهتوفر 80% من الإضاءة.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔥 السخان ساعة بس\nمتسيبوش شغال طول اليوم.\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔌 افصل الشاحن\nالشاحن بيسحب كهربا حتى لو مش بيشحن.')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
+
+<div class="card">
+<h2>💡 نصائح سريعة</h2>
+<p>✅ استخدم لمبات LED - بتوفر 80%<br>
+✅ السخان الغاز أوفر من الكهرباء<br>
+✅ افصل الشواحن بعد الشحن<br>
+✅ التكييف على 24 درجة هو الأوفر<br>
+✅ الطاقة الشمسية بتخلي فاتورتك صفر</p>
 </div>
-<div id="tipResult" hidden style="margin-top:14px"><p id="tipAnswer" class="ai-box"></p></div>
-</section>
-</main>
-<footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة<br>مدعوم بـ Gemini Flash عن طريق OpenRouter</footer>
+
+</div>
+<footer>صُنع بواسطة سيف - مشروع المدرسة 2026</footer>
+
 <script>
-// ===== هنا تحط المفتاح الجديد بتاع الموقع =====
-// 1- روح OpenRouter واعمل مفتاح جديد للموقع بس
-// 2- حط Limit 1 دولار
-// 3- الصق المفتاح هنا مكان الكلام ده
+// ================== مفتاح الذكاء الاصطناعي ==================
 const SITE_KEY = "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";
-const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
-let last=null;
-function addDevice(){const box=document.createElement("div");box.className="device";const sel=document.createElement("select");appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز مش موجود";sel.appendChild(co);const watt=document.createElement("input");watt.type="number";watt.value="1500";const qty=document.createElement("input");qty.type="number";qty.value="1";const hours=document.createElement("input");hours.type="number";hours.value="5";const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt}sel.addEventListener("change",upd);const del=document.createElement("button");del.className="remove";del.textContent="🗑️ حذف";del.onclick=()=>box.remove();box.innerHTML="<label>1 - نوع الجهاز</label>";box.append(sel);let g=document.createElement("div");g.className="grid";let c1=document.createElement("div");c1.innerHTML="<label>2 - القدرة بالوات (W)</label>";c1.append(watt);let c2=document.createElement("div");c2.innerHTML="<label>3 - العدد</label>";c2.append(qty);let c3=document.createElement("div");c3.innerHTML="<label>4 - ساعات في اليوم</label>";c3.append(hours);g.append(c1,c2,c3);box.append(name,g,del);document.getElementById("devices").appendChild(box)}
-function calculate(){let daily=0,biggest=0,bigName="",saveKwh=0,list=[];document.querySelectorAll(".device").forEach(row=>{let sel=row.querySelector("select");let ins=row.querySelectorAll("input");let custom=sel.value==="custom";let name=custom?ins[0].value.trim():appliances[Number(sel.value)].name;let watt=Number(ins[custom?1:0].value),qty=Number(ins[custom?2:1].value),hours=Number(ins[custom?3:2].value);if(!name||watt<=0||qty<1||hours<0||hours>24){alert("راجع البيانات");return}let e=watt*qty*hours/1000;daily+=e;saveKwh+=watt*qty*Math.min(hours,1)/1000;if(e>biggest){biggest=e;bigName=name}list.push({name,energy:e})});let monthly=daily*30,price=Number(document.getElementById("price").value),cost=monthly*price,saving=saveKwh*30*price;last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2)};document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";document.getElementById("biggest").textContent=bigName;document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";let max=Math.max(...list.map(x=>x.energy),1);document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");document.getElementById("results").hidden=false;document.getElementById("results").scrollIntoView({behavior:"smooth"})}
-function quickAsk(q){document.getElementById("question").value=q;askAI()}
-function localAnswer(q){
-let t="";if(last){t+="📊 بيتك: "+last.monthly+" ك.و.س | "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
-let l=q.toLowerCase();
-if(l.includes("غاز")&&(l.includes("سخان")||l.includes("سخن"))){t+="🔥 سخان غاز:\n- مش بيستهلك كهربا كتير، بيستهلك غاز.\n- لازم تهوية كويسة.\n- وطي الشعلة، ومتسيبش المية مفتوحة."}
-else if(l.includes("سخان")){t+="⚡ سخان كهربا - 2000 وات:\n- شغله ساعة بس واطفيه.\n- هيوفرلك حوالي 120 جنيه."}
-else if(l.includes("تكييف")||l.includes("تكيف")){t+="❄️ التكييف:\n- على 24، كل درجة أقل = 6% زيادة.\n- نظف الفلتر.\n- هتوفر "+(last?last.saving:"150")+" جنيه."}
-else if(l.includes("فاتورة")||l.includes("عالية")||l.includes("توفير")){t+="💰 قلل فاتورتك:\n1- LED بدل العادية\n2- افصل الشاحن\n3- ركز على "+(last?last.biggest:"التكييف")}
-else if(l.includes("لمبة")||l.includes("ليد")){t+="💡 LED:\n- العادية 60 وات، الليد 12 وات.\n- 7 لمبات: العادية 63 ج، الليد 12 ج."}
-else{t+="💡 اسألني عن: التكييف، السخان الغاز، الفاتورة، اللمبة"}
-return t;
+// ===================================================
+
+function calc(){
+  let b = Number(document.getElementById('bill').value);
+  if(!b){ alert('اكتب فاتورتك الأول'); return; }
+  let save = Math.round(b * 0.5);
+  let after = b - save;
+  document.getElementById('calcResult').innerHTML = `<div class="result">🎉 هتوفر ${save} جنيه! فاتورتك هتبقى ${after} جنيه بدل ${b} جنيه</div>`;
 }
+
+const MODELS = [
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "google/gemini-2.0-flash-exp:free",
+  "google/gemini-flash-1.5-8b",
+  "deepseek/deepseek-chat-v3.1:free"
+];
+
+function smartAnswer(q){
+  q = q.toLowerCase();
+  if(q.includes('سخان') && q.includes('غاز')) return "السخان الغاز هو جهاز بيسخن المياه باستخدام الغاز الطبيعي بدل الكهرباء. مميزاته: أرخص بكتير من السخان الكهرباء، بيسخن المياه بسرعة، وبيوفر حوالي 60% من استهلاك الكهرباء. نصيحة: لو عندك غاز طبيعي في البيت، السخان الغاز هو أفضل اختيار للتوفير.";
+  if(q.includes('تكييف')) return "عشان توفر في التكييف: اظبطه على 24 درجة، نضف الفلتر كل أسبوعين، اقفل الشبابيك كويس، واستخدم مروحة معاه. كده هتوفر 30% من استهلاك التكييف.";
+  if(q.includes('فاتورة') || q.includes('اوفر') || q.includes('أوفر')) return "عشان توفر 50% من فاتورتك: 1) غير كل اللمبات لـ LED. 2) استخدم سخان غاز بدل كهرباء. 3) افصل أي جهاز مش بتستخدمه. 4) التكييف على 24. 5) اغسل هدومك بمياه باردة. لو عملت دول، فاتورتك هتنزل النص.";
+  if(q.includes('شمسية') || q.includes('طاقة')) return "الطاقة الشمسية هي تحويل ضوء الشمس لكهرباء عن طريق ألواح شمسية. بتركبها على السطح، وبتخلي فاتورتك قريبة من الصفر، وبتدفع تمنها مرة واحدة وبتوفر طول عمرك.";
+  if(q.includes('لمبة') || q.includes('لمبات')) return "لمبات LED بتوفر 80% كهرباء عن اللمبات العادية، وعمرها أطول 10 مرات. غير كل لمبات البيت لـ LED وهتلاحظ الفرق في الفاتورة من أول شهر.";
+  return "نصيحة عامة للتوفير: استخدم لمبات LED، افصل الشواحن، اظبط التكييف على 24، واستخدم السخان الغاز. كل دي حاجات بسيطة هتخلي فاتورتك تنزل 50%.";
+}
+
 async function askAI(){
-let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return}
-let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById("aiSource");
-document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير والنصائح بيفكر بـ Gemini Flash...";srcEl.textContent="";
-if(!SITE_KEY||SITE_KEY.includes("حط_مفتاحك")){ansEl.textContent=localAnswer(q);srcEl.textContent="⚠️ لسه محطتش المفتاح في الكود - دي إجابة ذكية محفوظة";return}
-try{
-let system="انت مساعد التوفير والنصائح، مساعد ذكي لمشروع طالب اسمه سيف في الصف الثاني الاعدادي عن ترشيد الكهرباء في مصر. رد بالعامية المصرية البسيطة، قصير وواضح، بنقط، واذكر ارقام توفير بالجنيه. ";
-if(last){system+="بيانات بيت المستخدم: استهلاك شهري "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". "}
-let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+SITE_KEY,"Content-Type":"application/json","HTTP-Referer":location.href,"X-Title":"Smart Energy Saver"},body:JSON.stringify({model:"google/gemini-2.0-flash-001:free",messages:[{role:"system",content:system},{role:"user",content:q}],temperature:0.7,max_tokens:800})});
-let data=await res.json();
-if(data.error){ansEl.textContent="حصل مشكلة في الذكاء، هرد عليك بالوضع الذكي:\n\n"+localAnswer(q);srcEl.textContent="الذكاء الحقيقي مش شغال دلوقتي - رديت بالوضع الذكي";return}
-let txt=data.choices?.[0]?.message?.content||"";
-ansEl.textContent=txt;srcEl.textContent="✅ إجابة حقيقية من Gemini Flash عن طريق OpenRouter";
-}catch(e){ansEl.textContent=localAnswer(q);srcEl.textContent="النت ضعيف، رديت بالوضع الذكي"}
+  let input = document.getElementById('q');
+  let q = input.value.trim();
+  if(!q) return;
+  let box = document.getElementById('chatBox');
+  let status = document.getElementById('aiStatus');
+  box.innerHTML += `<div class="msg user">${q}</div>`;
+  input.value = '';
+  box.innerHTML += `<div class="msg ai" id="loading">⏳ بفكر... ثواني...</div>`;
+  box.scrollTop = box.scrollHeight;
+
+  let gotReal = false;
+
+  // جرب كل الموديلات لحد ما واحد يشتغل
+  for(let model of MODELS){
+    try{
+      status.innerText = "بجرب موديل: " + model;
+      let res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + SITE_KEY,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://saifabosada4-sudo.github.io/smart-energy-saver/",
+          "X-Title": "Smart Energy Saver"
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            {role:"system", content:"انت مساعد مصري شاطر في توفير الطاقة والكهرباء. رد بالعربي المصري البسيط، واختصر، وادي نصايح عملية. لو السؤال عن سخان غاز او تكييف او فاتورة، اشرح بالتفصيل."},
+            {role:"user", content: q}
+          ]
+        })
+      });
+      let data = await res.json();
+      if(data.choices && data.choices[0] && data.choices[0].message){
+        document.getElementById('loading').remove();
+        box.innerHTML += `<div class="msg ai">${data.choices[0].message.content}<br><span class="badge">✅ إجابة حقيقية من ${model}</span></div>`;
+        gotReal = true;
+        status.innerText = "✅ شغال بـ " + model;
+        break;
+      }
+    }catch(e){ console.log("فشل موديل", model, e); }
+  }
+
+  if(!gotReal){
+    let loading = document.getElementById('loading');
+    if(loading) loading.remove();
+    box.innerHTML += `<div class="msg ai">${smartAnswer(q)}<br><span class="badge">💡 وضع ذكي - الذكاء الاصطناعي مش متاح دلوقتي، دي إجابة محفوظة</span></div>`;
+    status.innerText = "⚠️ حصل مشكلة في الذكاء - تم استخدام الوضع الذكي";
+  }
+  box.scrollTop = box.scrollHeight;
 }
-function showTip(txt){document.getElementById("tipAnswer").textContent=txt;document.getElementById("tipResult").hidden=false}
-function updateLive(){let b=Number(document.getElementById("beforeRange").value),a=Number(document.getElementById("afterRange").value);document.getElementById("beforeVal").textContent=b;document.getElementById("afterVal").textContent=a;let diff=b-a,pct=b?Math.round(diff/b*100):0;document.getElementById("liveSaving").textContent=diff>0?`وفرت ${diff} ك.و.س - ${pct}%`:"لسه موفرتش - قلل اللي تحت";document.getElementById("liveBar").style.width=Math.max(pct,0)+"%"}document.getElementById("beforeRange").oninput=updateLive;document.getElementById("afterRange").oninput=updateLive;updateLive();
-document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;addDevice();addDevice();
+
+document.getElementById('q').addEventListener('keydown', function(e){ if(e.key==='Enter') askAI(); });
 </script>
 </body>
 </html>
