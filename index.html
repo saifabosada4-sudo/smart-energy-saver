@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Energy Saver AI | موفر الطاقة الذكي</title>
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif}
+body{margin:0;background:#eef5f0;color:#1e352a}
+header{background:linear-gradient(135deg,#052e22,#0a5c3f,#14a565);color:#fff;padding:22px 16px 28px;text-align:center}
+header h1{font-size:32px;line-height:1.4;margin:10px 0;color:#ffe17b}
+header p{font-size:16px;line-height:1.9;max-width:650px;margin:auto;opacity:.95}
+.badge{background:#ffffff22;border:1px solid #ffffff44;padding:6px 14px;border-radius:999px;font-size:13px;display:inline-block}
+main{max-width:980px;margin:auto;padding:16px 12px}
+.card{background:#fff;border-radius:20px;padding:22px;margin-bottom:18px;box-shadow:0 8px 30px #00000012}
+.card h2{color:#0a6a43;margin:0 0 8px;font-size:22px}
+.sub{color:#666;font-size:14px;line-height:1.9;margin:0 0 12px}
+label{display:block;font-weight:800;margin:14px 0 6px;font-size:14px}
+input,select,textarea{width:100%;padding:13px;border:1.5px solid #dce8df;border-radius:12px;font-size:16px;background:#fbfdfb;outline:none}
+button{border:0;border-radius:12px;padding:14px;background:#146c43;color:#fff;font-size:16px;font-weight:800;width:100%;margin-top:12px;cursor:pointer}
+.secondary{background:#174d8c}
+.remove{background:#fff;color:#bd3434;border:1.5px solid #f0c0c0}
+.device{background:#f5f9f6;padding:16px;border:1px solid #e1ebe4;border-radius:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result{background:linear-gradient(135deg,#073c2b,#146c43);color:#fff;padding:20px;border-radius:16px;margin-top:15px;line-height:2}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:#ffffff1c;padding:12px;border-radius:12px}
+.kpi strong{color:#ffe17b;font-size:18px}
+.bar{height:10px;background:#ffffff2a;border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:#ffe17b}
+.quick{display:flex;gap:8px;flex-wrap:wrap}
+.quick button{width:auto;padding:9px 14px;font-size:13px;background:#fff;color:#146c43;border:1.5px solid #146c43;margin:0}
+.ai{white-space:pre-wrap;line-height:2;background:#ffffff14;padding:14px;border-radius:12px}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.step{background:#f0f7f2;border-radius:16px;padding:14px;text-align:center}
+.tips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tip{background:#fff8df;border:1px solid #e8cf77;border-radius:14px;padding:14px}
+footer{text-align:center;background:#073c2b;color:#fff;padding:26px;line-height:2}
+footer b{color:#ffe17b}
+@media(max-width:600px){.steps,.tips,.kpis,.grid{grid-template-columns:1fr}header h1{font-size:26px}}
+</style>
+</head>
+<body>
+<header>
+<span class="badge">🧠 ذكاء اصطناعي • 📊 حاسبة • 🔬 تجربة علمية</span>
+<h1>وفر كهربتك.. وفر فلوسك<br>واحمي كوكبك 🌍</h1>
+<p>اكتب أجهزتك، اعرف استهلاكك بالظبط، وخد نصيحة ذكية مخصصة لبيتك. معمول لبيوت مصرية حقيقية.</p>
+</header>
+<main>
+<section class="card">
+<h2>🎯 ازاي بيشتغل؟</h2><p class="sub">3 خطوات بس هتشرحهم للجنة.</p>
+<div class="steps">
+<div class="step"><b style="font-size:28px">1️⃣</b><h3>دخل أجهزتك</h3><p>اختار الجهاز والساعات، والوات جاهز.</p></div>
+<div class="step"><b style="font-size:28px">2️⃣</b><h3>احسب</h3><p>المعادلة: وات × عدد × ساعات ÷ 1000</p></div>
+<div class="step"><b style="font-size:28px">3️⃣</b><h3>خد نصيحة</h3><p>المستشار بيحلل بيتك ويديلك حل.</p></div>
+</div>
+</section>
+
+<section class="card" id="calc">
+<h2>⚡ حاسبة استهلاك الكهرباء</h2>
+<p class="sub">الوات مكتوب على ضهر أي جهاز جنب حرف W.</p>
+<div id="devices"></div>
+<button class="secondary" id="addBtn" type="button">+ إضافة جهاز</button>
+<label>سعر الكيلووات بالجنيه</label>
+<input id="price" type="number" value="2.5">
+<button id="calcBtn" type="button">احسب استهلاكي 📊</button>
+<div id="results" class="result" hidden>
+<h3>📊 تقرير بيتك</h3>
+<div class="kpis">
+<div class="kpi">اليومي<br><strong id="daily"></strong></div>
+<div class="kpi">الشهري<br><strong id="monthly"></strong></div>
+<div class="kpi">التكلفة<br><strong id="cost"></strong></div>
+<div class="kpi">أكتر جهاز<br><strong id="biggest"></strong></div>
+</div>
+<p>💰 التوفير المحتمل: <strong id="saving" style="color:#ffe17b"></strong></p>
+<div id="chart"></div>
+<button style="background:#ffe17b;color:#073c2b" onclick="window.print()">🖨️ اطبع تقريري للجنة</button>
+</div>
+</section>
+
+<section class="card" id="ai">
+<h2>🧠 مستشار الطاقة الذكي</h2>
+<p class="sub">احسب الأول فوق، وبعدين اسأل، هيجاوبك على حسب بيتك انت.</p>
+<div class="quick">
+<button type="button" onclick="quickAsk('كيف أقلل استهلاك التكييف؟')">❄️ التكييف</button>
+<button type="button" onclick="quickAsk('كيف أوفر في السخان؟')">🔥 السخان</button>
+<button type="button" onclick="quickAsk('فاتورتي عالية اعمل ايه؟')">💸 فاتورتي عالية</button>
+<button type="button" onclick="quickAsk('هل اللمبة الليد بتوفر فعلا؟')">💡 لمبة ليد</button>
+</div>
+<label>اكتب سؤالك</label>
+<textarea id="question" rows="3" placeholder="مثلاً: كيف أقلل استهلاك التكييف؟"></textarea>
+<button id="askBtn" type="button">اسأل المستشار ✨</button>
+<div id="aiResult" class="result" hidden><strong>إجابة المستشار:</strong><p id="aiAnswer" class="ai"></p></div>
+</section>
+
+<section class="card">
+<h2>🔬 التجربة العلمية</h2>
+<label>الاستهلاك قبل التجربة (ك.و.س)</label><input id="before" type="number" placeholder="مثال: 120">
+<label>الاستهلاك بعد التجربة (ك.و.س)</label><input id="after" type="number" placeholder="مثال: 95">
+<button class="secondary" id="compareBtn" type="button">قارن النتائج 🔬</button>
+<div id="comparison" class="result" hidden></div>
+</section>
+
+<section class="card">
+<h2>💡 4 نصايح هتوفرلك فلوس بجد</h2>
+<div class="tips">
+<div class="tip"><b>❄️ التكييف على 24</b><p>كل درجة أقل بتزود الاستهلاك 6%.</p></div>
+<div class="tip"><b>💡 غير لمباتك لـ LED</b><p>هتوفر 80% من نور البيت.</p></div>
+<div class="tip"><b>🔥 السخان ساعة واحدة</b><p>متسيبوش شغال طول اليوم.</p></div>
+<div class="tip"><b>🔌 شيل الفيشة</b><p>الشاحن بيستهلك حتى وهو مطفي.</p></div>
+</div>
+</section>
+</main>
+<footer><b>Smart Energy Saver AI</b><br>الطالب: سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • محافظة الجيزة<br>صمم بذكاء لخدمة كل بيت مصري 🇪🇬</footer>
+<script>
+const appliances=[
+{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},
+{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},
+{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},
+{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},
+{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},
+{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},
+{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},
+{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},
+{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}
+];
+let last=null;
+function addDevice(){
+ const box=document.createElement("div");box.className="device";
+ const sel=document.createElement("select");
+ appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});
+ let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز غير موجود";sel.appendChild(co);
+ const watt=document.createElement("input");watt.type="number";watt.value="1500";
+ const qty=document.createElement("input");qty.type="number";qty.value="1";
+ const hours=document.createElement("input");hours.type="number";hours.value="5";
+ const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;
+ function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt;}
+ sel.addEventListener("change",upd);
+ const del=document.createElement("button");del.className="remove";del.textContent="حذف";del.onclick=()=>box.remove();
+ box.innerHTML="<label>نوع الجهاز</label>";box.append(sel);
+ let g=document.createElement("div");g.className="grid";g.append(name,watt,qty,hours);box.append(g,del);
+ document.getElementById("devices").appendChild(box);
+}
+function calculate(){
+ let daily=0,biggest=0,bigName="",saveKwh=0,list=[];
+ document.querySelectorAll(".device").forEach(row=>{
+  let sel=row.querySelector("select");let ins=row.querySelectorAll("input");
+  let custom=sel.value==="custom";
+  let name=custom?ins[0].value.trim():appliances[Number(sel.value)].name;
+  let watt=Number(ins[custom?1:0].value),qty=Number(ins[custom?2:1].value),hours=Number(ins[custom?3:2].value);
+  if(!name||watt<=0||qty<1||hours<0||hours>24){alert("راجع البيانات");return;}
+  let e=watt*qty*hours/1000;daily+=e;saveKwh+=watt*qty*Math.min(hours,1)/1000;
+  if(e>biggest){biggest=e;bigName=name;}list.push({name,hours,energy:e});
+ });
+ let monthly=daily*30,price=Number(document.getElementById("price").value),cost=monthly*price,saving=saveKwh*30*price;
+ last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2)};
+ document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";
+ document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";
+ document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";
+ document.getElementById("biggest").textContent=bigName;
+ document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";
+ let max=Math.max(...list.map(x=>x.energy),1);
+ document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");
+ document.getElementById("results").hidden=false;
+ document.getElementById("results").scrollIntoView({behavior:"smooth"});
+}
+function quickAsk(q){document.getElementById("question").value=q;askAI();}
+function askAI(){
+ let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return;}
+ let t="";
+ if(last){t+="📊 بناء على بيتك: استهلاكك "+last.monthly+" ك.و.س، وتكلفتك "+last.cost+" جنيه، وأكتر جهاز هو "+last.biggest+".\n\n";}else{t+="💡 احسب الأول فوق عشان اديلك نصيحة مخصصة:\n\n";}
+ let l=q.toLowerCase();
+ if(l.includes("تكييف"))t+="❄️ التكييف أكتر جهاز بيستهلك:\n- اظبطه على 24 مش 18، كل درجة أقل بتزود الاستهلاك 6%.\n- نضف الفلتر، وشغل المروحة معاه.\n- اقفل الباب والشباك.\n- لو قللت ساعتين هتوفر حوالي "+(last?last.saving:"150")+" جنيه في الشهر.";
+ else if(l.includes("سخان"))t+="🔥 السخان:\n- شغله ساعة واحدة قبل الحمام واطفيه.\n- متسيبوش شغال طول اليوم.\n- اظبطه على درجة متوسطة.";
+ else if(l.includes("فاتورة")||l.includes("فلوس")||l.includes("توفير")||l.includes("اوفر"))t+="💰 عشان تقلل فاتورتك:\n1- غير كل اللمبات لـ LED هتوفر 80%.\n2- شيل الشاحن من الفيشة.\n3- شغل الغسالة مرة مليانة.\n4- ركز على "+(last?last.biggest:"التكييف")+ " لأنه أكتر جهاز عندك.";
+ else if(l.includes("لمبة")||l.includes("ليد"))t+="💡 الليد بيوفر فعلا:\n- العادية 60 وات، الليد 12 وات.\n- لو عندك 7 لمبات، العادية 63 جنيه في الشهر، الليد 12 جنيه بس.";
+ else if(l.includes("ثلاجة"))t+="🧊 الثلاجة:\n- متفتحهاش كتير، ومتحطش أكل سخن جواها.\n- سيب مسافة وراها للتهوية.";
+ else t+="💡 نصيحتي:\n- التكييف والسخان والكاتيل هما أكتر 3 أجهزة.\n- ركز على جهاز واحد كبير وقلل تشغيله ساعتين.\n- جرب تسألني عن: التكييف، السخان، اللمبة، الفاتورة.";
+ document.getElementById("aiAnswer").textContent=t;document.getElementById("aiResult").hidden=false;
+}
+function compare(){
+ let b=Number(document.getElementById("before").value),a=Number(document.getElementById("after").value);
+ if(!b||a<0){alert("دخل أرقام صح");return;}
+ let diff=b-a,pct=diff/b*100,out=document.getElementById("comparison");out.hidden=false;
+ out.innerHTML=diff>0?"🎉 مبروك! وفرت "+diff.toFixed(2)+" ك.و.س بنسبة "+pct.toFixed(1)+"%":"زاد الاستهلاك، راجع النصايح.";
+}
+document.getElementById("addBtn").onclick=addDevice;
+document.getElementById("calcBtn").onclick=calculate;
+document.getElementById("askBtn").onclick=askAI;
+document.getElementById("compareBtn").onclick=compare;
+addDevice();addDevice();
+</script>
+</body>
+</html>
