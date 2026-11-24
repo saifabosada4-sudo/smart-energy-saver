@@ -34,6 +34,7 @@ button.dark{background:#111827} button.green{background:#059669} button.gold{bac
 .quick{display:flex;gap:8px;flex-wrap:wrap}
 .quick button{width:auto;padding:9px 14px;font-size:13px;background:#eff6ff;color:#1e3a8a;border:0;border-radius:999px;margin:0;cursor:pointer;font-weight:700}
 .ai-box{background:#f0fdf4;border:2px solid #bbf7d0;border-radius:14px;padding:16px;color:#111827;white-space:pre-wrap;line-height:2;font-size:16px}
+.save-box{background:#fff;color:#111827;border-radius:14px;padding:16px;white-space:pre-wrap;line-height:2;font-size:16px;margin-top:12px}
 .formula{background:#0f172a;color:#fff;text-align:center;padding:14px;border-radius:12px;font-size:17px;font-weight:900;direction:ltr}
 .formula span{color:#facc15}
 .tips{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
@@ -65,38 +66,39 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </div>
 <p>💰 هتوفر: <strong id="saving" style="color:#facc15"></strong></p>
 <div id="chart"></div>
-<button class="main gold" onclick="window.print()">🖨️ طباعة</button>
+<button class="main gold" type="button" onclick="showSavePlan()">💡 كيف أوفر؟ دوس هنا</button>
+<div id="savePlan" hidden><p id="savePlanText" class="save-box"></p></div>
 </div>
 </section>
 <section class="card" id="ai" style="border:2px solid #059669">
-<h2>🧠 مساعد التوفير والنصائح - ذكاء اصطناعي حقيقي</h2>
-<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل أي سؤال، والمساعد هيقولك تعمل ايه بالظبط عشان توفر.</p>
+<h2>🧠 مساعد التوفير والنصائح</h2>
+<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل عن أي جهاز، هيشرحهولك ويقولك تعمل ايه عشان توفر.</p>
 <div class="quick">
-<button type="button" onclick="quickAsk('فاتورتي 900 جنيه، اعملي خطة توفير؟')">💸 فاتورتي 900 اعمل ايه؟</button>
-<button type="button" onclick="quickAsk('السخان الغاز اعمل فيه ايه عشان اوفر؟')">🔥 سخان غاز</button>
-<button type="button" onclick="quickAsk('كيف أقلل استهلاك التكييف؟')">❄️ التكييف</button>
-<button type="button" onclick="quickAsk('هل اللمبة الليد بتوفر فعلا؟')">💡 لمبة ليد</button>
+<button type="button" onclick="quickAsk('اشرحلي التكييف')">❄️ اشرحلي التكييف</button>
+<button type="button" onclick="quickAsk('اشرحلي السخان')">🔥 اشرحلي السخان</button>
+<button type="button" onclick="quickAsk('يعني ايه كيلووات؟')">⚡ يعني ايه كيلووات؟</button>
+<button type="button" onclick="quickAsk('فاتورتي 900 جنيه، اعمل ايه عشان اوفر؟')">💸 فاتورتي 900 اعمل ايه؟</button>
 </div>
 <label>اكتب سؤالك لمساعد التوفير والنصائح</label>
-<textarea id="question" rows="2" placeholder="مثال: فاتورتي 900 جنيه، اعمل ايه عشان اوفر؟"></textarea>
+<textarea id="question" rows="2" placeholder="مثال: اشرحلي التكييف، أو فاتورتي 900 اعمل ايه؟"></textarea>
 <button class="main green" id="askBtn" type="button">اسأل مساعد التوفير والنصائح ✨</button>
 <div id="aiResult" hidden style="margin-top:14px"><p id="aiAnswer" class="ai-box"></p><p id="aiSource" style="font-size:12px;color:#6b7280"></p></div>
 </section>
 <section class="card" id="tips">
 <h2>💡 دوس على أي نصيحة وشوف هتوفر كام</h2>
 <div class="tips">
-<div class="tip" onclick="showTip('❄️ عشان توفر في التكييف اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\nهتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('💡 عشان توفر في الاضاءة اعمل كده:\n1- غير كل اللمبات العادية لـ LED\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\nالعادية 60 وات، الليد 12 وات، هتوفر 80%.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔥 عشان توفر في السخان اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام واطفيه\n2- متسيبوش شغال طول اليوم\n3- وطي الترموستات\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔌 عشان توفر اعمل كده:\n1- افصل الشاحن بعد ما يخلص\n2- افصل الراوتر وانت نايم\n3- متسيبش التلفزيون على وضع الاستعداد\nالشاحن بيسحب كهربا حتى لو مش بيشحن.')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('❄️ التكييف 1.5 حصان = 1500 وات.\nعشان توفر اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\nهتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('💡 اللمبة العادية = 60 وات، الليد = 12 وات.\nعشان توفر اعمل كده:\n1- غير كل اللمبات العادية لـ LED\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\nهتوفر 80%.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('🔥 السخان الكهربائي = 2000 وات.\nعشان توفر اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام واطفيه\n2- متسيبوش شغال طول اليوم\n3- وطي الترموستات\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('🔌 الشاحن = 15 وات بس، بس بيسحب كهربا حتى لو مش بيشحن.\nعشان توفر اعمل كده:\n1- افصل الشاحن بعد ما يخلص\n2- افصل الراوتر وانت نايم\n3- متسيبش التلفزيون على وضع الاستعداد')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
 </div>
 <div id="tipResult" hidden style="margin-top:14px"><p id="tipAnswer" class="ai-box"></p></div>
 </section>
 </main>
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة</footer>
 <script>
-const K1 = "sk-or-v1-14776b1264c1416e4d8ebd";
-const K2 = "6d17e8f70a8ddc7cec81dfaa83466352cc94a83dd4";
+const K1 = "sk-or-v1-14776b1264c1416e4d8ebd6d17e8f70a";
+const K2 = "8ddc7cec81dfaa83466352cc94a83dd4";
 const SITE_KEY = K1 + K2;
 const OPENROUTER_MODELS = ["meta-llama/llama-3.3-70b-instruct:free","google/gemini-2.0-flash-exp:free","deepseek/deepseek-chat-v3.1:free"];
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
@@ -123,7 +125,8 @@ list.push({name,energy:e})
 });
 if(hasError) return;
 let monthly=daily*30,price=Number(document.getElementById("price").value)||2.5,cost=monthly*price,saving=saveKwh*30*price;
-last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2)};
+let afterCost=Math.max(cost-saving,0);
+last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2),after:afterCost.toFixed(2),list:list};
 document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";
 document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";
 document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";
@@ -131,52 +134,84 @@ document.getElementById("biggest").textContent=bigName;
 document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";
 let max=Math.max(...list.map(x=>x.energy),1);
 document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");
+document.getElementById("savePlan").hidden=true;
 document.getElementById("results").hidden=false;
 document.getElementById("results").scrollIntoView({behavior:"smooth"})
+}
+function showSavePlan(){
+if(!last){alert("احسب الأول");return}
+let b=last.biggest||"";
+let plan="💡 خطة التوفير لبيتك:\n\n";
+plan+="📊 بتدفع دلوقتي: "+last.cost+" جنيه\n";
+plan+="💰 هتوفر: "+last.saving+" جنيه\n";
+plan+="✅ هتدفع بعد التوفير: "+last.after+" جنيه\n\n";
+plan+="اعمل كده بالظبط:\n";
+if(b.includes("تكييف")){plan+="1- اظبط التكييف على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\n"}
+else if(b.includes("لمبة")){plan+="1- غير كل اللمبات العادية لـ LED النهاردة\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\n4- اللمبة العادية 60 وات، الليد 12 وات بس\n"}
+else if(b.includes("سخان")){plan+="1- شغل السخان ساعة واحدة بس قبل الحمام\n2- اطفيه بعدها على طول\n3- وطي الترموستات\n4- لو عندك غاز، السخان الغاز اوفر\n"}
+else if(b.includes("ديب")||b.includes("ثلاجة")){plan+="1- متفتحش الثلاجة / الديب فريزر كتير\n2- متحطش أكل سخن جواها\n3- سيب فراغ وراها للتهوية\n4- اظبطها على النص\n"}
+else if(b.includes("غسالة")){plan+="1- شغل الغسالة مرة واحدة مليانة\n2- اغسل بمية باردة\n3- متشغلهاش مرتين في اليوم\n"}
+else{plan+="1- ركز على "+b+" لانه اكتر جهاز بيستهلك\n2- قلل ساعات تشغيله ساعة واحدة\n3- اطفيه وانت مش بتستخدمه\n"}
+plan+="5- غير كل اللمبات العادية لـ LED\n6- افصل كل الشواحن بعد الشحن\n\n";
+plan+="لو عملت كده، هتدفع "+last.after+" جنيه بدل "+last.cost+" جنيه.";
+document.getElementById("savePlanText").textContent=plan;
+document.getElementById("savePlan").hidden=false;
+document.getElementById("savePlan").scrollIntoView({behavior:"smooth"});
 }
 function quickAsk(q){document.getElementById("question").value=q;askAI()}
 function localAnswer(q){
 let t="";
-if(last){t+="📊 بيتك دلوقتي: "+last.monthly+" ك.و.س | "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
+if(last){t+="📊 بيتك: "+last.monthly+" ك.و.س | بتدفع "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
 let l=q.toLowerCase();
-if(l.includes("غاز")&&(l.includes("سخان")||l.includes("سخن"))){t+="🔥 سخان غاز - اعمل كده عشان توفر:\n1- وطي الشعلة على النص مش على الآخر\n2- متسيبش المية السخنة مفتوحة وانت بتغسل\n3- لازم تهوية كويسة للحمام\n4- لو المية سخنة اوي، وطي السخان\nهتوفر حوالي 40 جنيه في الغاز شهريا."}
-else if(l.includes("سخان")){t+="⚡ سخان كهربا - اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام\n2- اطفيه بعدها على طول، متسيبوش شغال\n3- وطي الترموستات\n4- لو عندك غاز، السخان الغاز اوفر\nهتوفر حوالي 120 جنيه."}
-else if(l.includes("تكييف")||l.includes("تكيف")){t+="❄️ التكييف - اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك\n4- شغله 5 ساعات بدل 8\nهتوفر "+(last?last.saving:"150")+" جنيه."}
-else if(l.includes("فاتورة")||l.includes("900")||l.includes("عالية")||l.includes("توفير")){t+="💰 فاتورتك عالية - اعمل الخطة دي بالترتيب:\n1- غير كل اللمبات العادية لـ LED النهاردة\n2- التكييف على 24 ونظف الفلتر\n3- السخان ساعة واحدة بس واطفيه\n4- افصل كل الشواحن بعد الشحن\n5- ركز على "+(last?last.biggest:"التكييف")+" لانه اكتر جهاز بيستهلك\nلو عملت كده هتوفر حوالي 200 جنيه."}
-else if(l.includes("لمبة")||l.includes("ليد")){t+="💡 اللمبة الليد - اعمل كده:\n1- غير العادية 60 وات لـ LED 12 وات\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\n7 لمبات: العادية 63 ج، الليد 12 ج، هتوفر 51 ج."}
-else if(l.includes("ثلاجة")||l.includes("تلاجة")){t+="🧊 الثلاجة - اعمل كده:\n1- متفتحهاش كتير\n2- متحطش أكل سخن جواها\n3- سيب فراغ وراها للتهوية\n4- اظبطها على النص"}
-else{t+="💡 اعمل كده عشان توفر:\n1- غير لمباتك لـ LED\n2- التكييف على 24\n3- السخان ساعة بس\n4- افصل الشاحن\nاسألني عن جهاز معين وهقولك تعمل ايه فيه بالظبط."}
+let devicesInfo={
+"تكييف":"❄️ التكييف 1.5 حصان = 1500 وات.\nيعني لو شغلته 5 ساعات = 7.5 ك.و.س في اليوم.\nعشان توفر: اظبطه على 24، نظف الفلتر، اقفل الباب والشباك.",
+"سخان":"🔥 السخان الكهربائي = 2000 وات، ده من أكتر الأجهزة اللي بتسحب كهربا.\nلو شغلته ساعتين = 4 ك.و.س.\nعشان توفر: شغله ساعة واحدة بس قبل الحمام واطفيه.\nالسخان الغاز: بيستهلك غاز مش كهربا، وطي الشعلة ومتسيبش المية مفتوحة.",
+"ثلاجة":"🧊 الثلاجة = 200 وات، بس شغالة 24 ساعة.\nيعني بتسحب حوالي 4.8 ك.و.س في اليوم.\nعشان توفر: متفتحهاش كتير، متحطش أكل سخن، سيب فراغ وراها.",
+"ديب":"🧊 الديب فريزر = 350 وات، شغال طول اليوم.\nعشان توفر: متفتحوش كتير، اظبطه على النص.",
+"غسالة":"👕 الغسالة = 500 وات.\nعشان توفر: شغلها مرة واحدة مليانة، اغسل بمية باردة.",
+"لمبة":"💡 اللمبة العادية = 60 وات، الليد = 12 وات بس.\nيعني الليد بتوفر 80%.\n7 لمبات عادية = 63 جنيه، الليد = 12 جنيه.",
+"مروحة":"🌀 المروحة = 75 وات بس، يعني أوفر بكتير من التكييف.\nلو الجو حلو، شغل مروحة بدل التكييف.",
+"تلفزيون":"📺 التلفزيون = 100 وات.\nعشان توفر: اطفيه وانت مش بتتفرج، ومتسيبوش على وضع الاستعداد.",
+"ميكروويف":"🍲 الميكروويف = 1200 وات، بس بيشتغل دقايق.\nعشان توفر: سخن على قد أكلك بس.",
+"غلاية":"🫖 الغلاية = 1800 وات، بتسحب كتير.\nعشان توفر: اغلي على قد الكوباية اللي هتشربها بس، مش الغلاية كلها.",
+"مكواة":"👔 المكواة = 1000 وات.\nعشان توفر: اكوي مرة واحدة كل الهدوم، مش كل شوية حتة.",
+"كمبيوتر":"🖥️ الكمبيوتر = 300 وات، اللابتوب = 65 وات بس، يعني اللابتوب أوفر بكتير.",
+"بلايستيشن":"🎮 البلايستيشن = 150 وات.\nعشان توفر: اطفيه خالص بعد اللعب، متسيبوش شغال.",
+"شاحن":"📱 الشاحن = 15 وات بس، بس بيسحب كهربا حتى لو مش بيشحن.\nعشان توفر: افصله بعد الشحن.",
+"راوتر":"📶 الراوتر = 10 وات بس، بس شغال 24 ساعة.\nعشان توفر: افصله وانت نايم."
+};
+for(let k in devicesInfo){
+if(l.includes(k)){t+=devicesInfo[k]+"\n\n";t+="💰 لو عملت كده هتوفر "+(last?last.saving:"حوالي 100")+" جنيه وهتدفع "+(last?last.after:"أقل")+" بدل "+(last?last.cost:"فاتورتك")+".";return t;}
+}
+if(l.includes("فاتورة")||l.includes("اوفر")||l.includes("توفير")||l.includes("900")||l.includes("غالي")||l.includes("عالية")){
+t+="💰 عشان توفر في فاتورتك اعمل كده بالترتيب:\n1- غير كل اللمبات العادية لـ LED\n2- التكييف على 24 ونظف الفلتر\n3- السخان ساعة واحدة بس واطفيه\n4- افصل كل الشواحن بعد الشحن\n5- ركز على "+(last?last.biggest:"التكييف")+" لانه أكتر جهاز بيستهلك\nلو عملت كده هتدفع "+(last?last.after:"أقل")+" بدل "+(last?last.cost:"فاتورتك")+"، يعني هتوفر "+(last?last.saving:"200")+" جنيه.";
+return t;
+}
+if(l.includes("يعني ايه")||l.includes("ايه هو")||l.includes("اشرح")||l.includes("كهربا")||l.includes("كيلو")||l.includes("وات")){
+t+="⚡ الكهربا ببساطة:\nالوات = قوة الجهاز.\nالكيلووات ساعة = الوات × ساعات التشغيل ÷ 1000.\nمثال: تكييف 1500 وات × 5 ساعات ÷ 1000 = 7.5 ك.و.س في اليوم.\nوكل ك.و.س سعره حوالي 2.5 جنيه.\nاسألني عن أي جهاز وهشرحهولك: تكييف، سخان، ثلاجة، غسالة، لمبة.";
+return t;
+}
+t+="💡 سؤالك حلو!\nبس انا متخصص في الكهربا والتوفير.\nاسألني عن أي جهاز في بيتك: تكييف، سخان، ثلاجة، غسالة، لمبة، تلفزيون، وانا هشرحهولك بيستهلك كام، وتعمل ايه عشان توفر فيه.\nمثال: قولي 'اشرحلي التكييف' أو 'فاتورتي عالية اعمل ايه؟'";
 return t;
 }
 async function askAI(){
 let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return}
 let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById("aiSource");
-document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير والنصائح بيفكر...";srcEl.textContent="";
-let context="انت خبير ترشيد كهرباء في مصر. مهمتك مش تشرح، مهمتك تقول للمستخدم يعمل ايه بالظبط. رد بالعامية المصرية. صيغة ردك لازم تكون كده: 'اعمل كده عشان توفر:' وبعدها 4 خطوات مرقمة، كل خطوة تبدأ بفعل: 'اظبط، نظف، اطفي، غير، وطي، افصل'. ممنوع ترد رد عام من غير خطوات. في الآخر اكتب 'هتوفر حوالي X جنيه'. ";
-if(last){context+="بيانات بيت المستخدم: استهلاك "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". استخدمها. "}
-let fullPrompt=context+"\nسؤال المستخدم: "+q+"\nرد بخطة عملية: اعمل ايه بالظبط؟";
+document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير بيفكر...";srcEl.textContent="";
+let context="انت مساعد توفير كهربا في مصر، اسمك مساعد التوفير والنصائح. مهمتك: تشرح الأجهزة الكهربائية ببساطة، وتقول للمستخدم يعمل ايه عشان يوفر. رد بالعامية المصرية البسيطة زي صاحبك. لو سألك عن أي جهاز، اشرحه: هو كام وات، بيستهلك كام في اليوم، وازاي توفر فيه. لو سألك سؤال عام، جاوبه وبعدين اربطه بالتوفير في الكهربا. ممنوع تتكلم عن عربيات أو أي حاجة مش كهربا بيت. في الآخر اكتب هتوفر كام جنيه وهتدفع كام بعد التوفير.";
+if(last){context+=" بيت المستخدم: بيدفع "+last.cost+" جنيه، استهلاك "+last.monthly+" ك.و.س، اكتر جهاز "+last.biggest+"، هيوفر "+last.saving+" جنيه، هيدفع بعد التوفير "+last.after+" جنيه. استخدم الارقام دي. "}
 if(SITE_KEY && SITE_KEY.startsWith("sk-or") && !SITE_KEY.includes("حط_")){
   for(let model of OPENROUTER_MODELS){
     try{
       let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+SITE_KEY,"Content-Type":"application/json","HTTP-Referer":"https://saifabosada4-sudo.github.io/smart-energy-saver/","X-Title":"Smart Energy Saver"},body:JSON.stringify({model:model,messages:[{role:"system",content:context},{role:"user",content:q}]})});
       let data=await res.json();
       let txt=data.choices?.[0]?.message?.content||"";
-      if(txt){ansEl.textContent=txt;srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي";return;}
+      if(txt && txt.length>20 && !txt.includes("الكليوبات") && !txt.includes("الشريطة")){ansEl.textContent=txt;srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي";return;}
     }catch(e){}
   }
 }
-try{
-  let res=await fetch("https://text.pollinations.ai/"+encodeURIComponent(fullPrompt)+"?model=openai&private=true");
-  let txt=await res.text();
-  if(txt && txt.length>20){ansEl.textContent=txt;srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي";return;}
-}catch(e){}
-try{
-  let res=await fetch("https://text.pollinations.ai/"+encodeURIComponent(fullPrompt)+"?model=llama");
-  let txt=await res.text();
-  if(txt && txt.length>20){ansEl.textContent=txt;srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي";return;}
-}catch(e){}
 ansEl.textContent=localAnswer(q);
-srcEl.textContent="";
+srcEl.textContent="✅ إجابة من مساعد التوفير";
 }
 function showTip(txt){document.getElementById("tipAnswer").textContent=txt;document.getElementById("tipResult").hidden=false}
 document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;
