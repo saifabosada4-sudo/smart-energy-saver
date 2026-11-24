@@ -107,14 +107,45 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة</footer>
 <script>
 // حط مفتاحك هنا متقسم نصين
-const K1 = "sk-or-v1-14776b1264c1416e4d8eb";
-const K2 = "d6d17e8f70a8ddc7cec81dfaa83466352cc94a83dd4";
+const K1 = "sk-or-v1-14776b1264c1416e4d8ebd6d17e8f7";
+const K2 = "0a8ddc7cec81dfaa83466352cc94a83dd4";
 const SITE_KEY = K1 + K2;
 const OPENROUTER_MODELS = ["meta-llama/llama-3.3-70b-instruct:free","google/gemini-2.0-flash-exp:free","deepseek/deepseek-chat-v3.1:free"];
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
 let last=null;
 function addDevice(){const box=document.createElement("div");box.className="device";const sel=document.createElement("select");appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز مش موجود";sel.appendChild(co);const watt=document.createElement("input");watt.type="number";watt.value="1500";const qty=document.createElement("input");qty.type="number";qty.value="1";const hours=document.createElement("input");hours.type="number";hours.value="5";const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt}sel.addEventListener("change",upd);const del=document.createElement("button");del.className="remove";del.textContent="🗑️ حذف";del.onclick=()=>box.remove();box.innerHTML="<label>1 - نوع الجهاز</label>";box.append(sel);let g=document.createElement("div");g.className="grid";let c1=document.createElement("div");c1.innerHTML="<label>2 - القدرة بالوات (W)</label>";c1.append(watt);let c2=document.createElement("div");c2.innerHTML="<label>3 - العدد</label>";c2.append(qty);let c3=document.createElement("div");c3.innerHTML="<label>4 - ساعات في اليوم</label>";c3.append(hours);g.append(c1,c2,c3);box.append(name,g,del);document.getElementById("devices").appendChild(box)}
-function calculate(){let daily=0,biggest=0,bigName="",saveKwh=0,list=[];document.querySelectorAll(".device").forEach(row=>{let sel=row.querySelector("select");let ins=row.querySelectorAll("input");let custom=sel.value==="custom";let name=custom?ins[0].value.trim():appliances[Number(sel.value)].name;let watt=Number(ins[custom?1:0].value),qty=Number(ins[custom?2:1].value),hours=Number(ins[custom?3:2].value);if(!name||watt<=0||qty<1||hours<0||hours>24){alert("راجع البيانات");return}let e=watt*qty*hours/1000;daily+=e;saveKwh+=watt*qty*Math.min(hours,1)/1000;if(e>biggest){biggest=e;bigName=name}list.push({name,energy:e})});let monthly=daily*30,price=Number(document.getElementById("price").value),cost=monthly*price,saving=saveKwh*30*price;last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2)};document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";document.getElementById("biggest").textContent=bigName;document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";let max=Math.max(...list.map(x=>x.energy),1);document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");document.getElementById("results").hidden=false;document.getElementById("results").scrollIntoView({behavior:"smooth"})}
+function calculate(){
+let devices=document.querySelectorAll(".device");
+if(devices.length===0){alert("ضيف جهاز الأول");return;}
+let daily=0,biggest=0,bigName="",saveKwh=0,list=[];
+let hasError=false;
+devices.forEach(row=>{
+if(hasError) return;
+let sel=row.querySelector("select");
+let ins=row.querySelectorAll("input");
+let custom=sel.value==="custom";
+let name=custom?ins[0].value.trim():appliances[Number(sel.value)].name;
+let watt=Number(ins[1].value),qty=Number(ins[2].value),hours=Number(ins[3].value);
+if(!name||!watt||watt<=0||!qty||qty<1||hours<0||hours>24){alert("راجع البيانات في جهاز: "+(name||"من غير اسم"));hasError=true;return;}
+let e=watt*qty*hours/1000;
+daily+=e;
+saveKwh+=watt*qty*Math.min(hours,1)/1000;
+if(e>biggest){biggest=e;bigName=name}
+list.push({name,energy:e})
+});
+if(hasError) return;
+let monthly=daily*30,price=Number(document.getElementById("price").value)||2.5,cost=monthly*price,saving=saveKwh*30*price;
+last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2)};
+document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";
+document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";
+document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";
+document.getElementById("biggest").textContent=bigName;
+document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";
+let max=Math.max(...list.map(x=>x.energy),1);
+document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");
+document.getElementById("results").hidden=false;
+document.getElementById("results").scrollIntoView({behavior:"smooth"})
+}
 function quickAsk(q){document.getElementById("question").value=q;askAI()}
 function localAnswer(q){
 let t="";if(last){t+="📊 بيتك: "+last.monthly+" ك.و.س | "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
@@ -164,4 +195,4 @@ document.getElementById("addBtn").onclick=addDevice;document.getElementById("cal
 addDevice();
 </script>
 </body>
-</html>
+  </html>
