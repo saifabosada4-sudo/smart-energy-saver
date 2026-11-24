@@ -42,7 +42,6 @@ button.dark{background:#111827} button.green{background:#059669} button.gold{bac
 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:14px;text-align:center;line-height:1.7;cursor:pointer}
 .tip div{font-size:30px}
 .big{font-size:32px;font-weight:900;color:#059669;text-align:center;margin:10px 0}
-.keybox{background:#fff7ed;border:2px dashed #fb923c;border-radius:14px;padding:14px;margin-top:12px}
 footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 @media(max-width:650px){.grid,.kpis,.tips{grid-template-columns:1fr 1fr}header h1{font-size:26px}}
 </style>
@@ -74,7 +73,7 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </section>
 <section class="card" id="ai" style="border:2px solid #059669">
 <h2>🧠 مساعد التوفير والنصائح</h2>
-<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">مدعوم بـ <b>Gemini Flash</b> عن طريق OpenRouter - ذكاء اصطناعي حقيقي، بيرد عليك بأي سؤال عن الكهرباء والتوفير.</p>
+<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">شغال عند الكل بـ <b>Gemini Flash</b> عن طريق OpenRouter - اسأله أي حاجة وهيرد عليك على طول، من غير ما تحط مفتاح.</p>
 <div class="quick">
 <button type="button" onclick="quickAsk('السخان الغاز اعمل فيه ايه؟')">🔥 سخان غاز</button>
 <button type="button" onclick="quickAsk('كيف أقلل استهلاك التكييف؟')">❄️ التكييف</button>
@@ -83,23 +82,8 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </div>
 <label>اكتب سؤالك لمساعد التوفير والنصائح</label>
 <textarea id="question" rows="2" placeholder="مثال: اشرحلي ازاي أوفر 50% من فاتورتي؟"></textarea>
-<label>⚡ اختار قوة الذكاء <small>- خليها على Gemini Flash، دي أحسن نسخة سريعة</small></label>
-<select id="model">
-<option value="google/gemini-2.0-flash-001">⚡ Gemini 2.0 Flash - الأسرع والأحسن لمشروعك</option>
-<option value="google/gemini-flash-1.5">✨ Gemini 1.5 Flash - نسخة ممتازة برضه</option>
-<option value="meta-llama/llama-3.3-70b-instruct">🦙 Llama 3.3 - بديل قوي</option>
-<option value="openai/gpt-4o-mini">🤖 GPT-4o Mini - بديل</option>
-</select>
 <button class="main green" id="askBtn" type="button">اسأل مساعد التوفير والنصائح ✨</button>
 <div id="aiResult" hidden style="margin-top:14px"><p id="aiAnswer" class="ai-box"></p><p id="aiSource" style="font-size:12px;color:#6b7280"></p></div>
-<div class="keybox">
-<label style="margin-top:0">🔑 ربط OpenRouter - المفتاح بيتحفظ في متصفحك انت بس، مش في الموقع</label>
-<input id="apiKey" type="password" placeholder="الصق مفتاح OpenRouter هنا - بيبدأ بـ sk-or-v1-...">
-<button class="main dark" id="saveKeyBtn" type="button" style="margin-top:10px">حفظ المفتاح وتشغيل Gemini Flash 🔐</button>
-<button type="button" id="deleteKeyBtn" style="background:none;border:0;color:#dc2626;cursor:pointer;font-size:13px;margin-top:8px">🗑️ مسح المفتاح من المتصفح</button>
-<p id="keyStatus" style="font-size:13px;color:#059669;margin:8px 0 0"></p>
-<p style="font-size:12px;color:#6b7280;line-height:1.8;margin:8px 0 0">اوعى تبعت المفتاح لحد، ولا تحطه في جيت هب. المفتاح ده بتاعك انت بس.</p>
-</div>
 </section>
 <section class="card" id="exp">
 <h2>🔬 جرّب التوفير بنفسك - حرّك وشوف</h2>
@@ -123,6 +107,11 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </main>
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة<br>مدعوم بـ Gemini Flash عن طريق OpenRouter</footer>
 <script>
+// ===== هنا تحط المفتاح الجديد بتاع الموقع =====
+// 1- روح OpenRouter واعمل مفتاح جديد للموقع بس
+// 2- حط Limit 1 دولار
+// 3- الصق المفتاح هنا مكان الكلام ده
+const SITE_KEY = "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";
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
 let last=null;
 function addDevice(){const box=document.createElement("div");box.className="device";const sel=document.createElement("select");appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز مش موجود";sel.appendChild(co);const watt=document.createElement("input");watt.type="number";watt.value="1500";const qty=document.createElement("input");qty.type="number";qty.value="1";const hours=document.createElement("input");hours.type="number";hours.value="5";const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt}sel.addEventListener("change",upd);const del=document.createElement("button");del.className="remove";del.textContent="🗑️ حذف";del.onclick=()=>box.remove();box.innerHTML="<label>1 - نوع الجهاز</label>";box.append(sel);let g=document.createElement("div");g.className="grid";let c1=document.createElement("div");c1.innerHTML="<label>2 - القدرة بالوات (W)</label>";c1.append(watt);let c2=document.createElement("div");c2.innerHTML="<label>3 - العدد</label>";c2.append(qty);let c3=document.createElement("div");c3.innerHTML="<label>4 - ساعات في اليوم</label>";c3.append(hours);g.append(c1,c2,c3);box.append(name,g,del);document.getElementById("devices").appendChild(box)}
@@ -143,26 +132,20 @@ async function askAI(){
 let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return}
 let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById("aiSource");
 document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير والنصائح بيفكر بـ Gemini Flash...";srcEl.textContent="";
-let key=localStorage.getItem("openrouter_key")||"";
-if(!key){ansEl.textContent=localAnswer(q);srcEl.textContent="⚠️ لسه محطتش مفتاح OpenRouter - دي إجابة ذكية محفوظة. حط المفتاح تحت عشان يبقى Gemini Flash حقيقي.";return}
-let model=document.getElementById("model").value;
+if(!SITE_KEY||SITE_KEY.includes("حط_مفتاحك")){ansEl.textContent=localAnswer(q);srcEl.textContent="⚠️ لسه محطتش المفتاح في الكود - دي إجابة ذكية محفوظة";return}
 try{
-let system="انت مساعد التوفير والنصائح، مساعد ذكي لمشروع طالب اسمه سيف في الصف الثاني الاعدادي عن ترشيد الكهرباء في مصر. رد بالعامية المصرية البسيطة، قصير وواضح، بنقط، واذكر ارقام توفير بالجنيه. لو المستخدم سأل عن سخان غاز فرق بينه وبين الكهربا. ";
-if(last){system+="بيانات بيت المستخدم: استهلاك شهري "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". اعطي نصيحة مخصصة لهذه البيانات. "}
-let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+key,"Content-Type":"application/json","HTTP-Referer":location.href,"X-Title":"Smart Energy Saver"},body:JSON.stringify({model:model,messages:[{role:"system",content:system},{role:"user",content:q}],temperature:0.7,max_tokens:800})});
+let system="انت مساعد التوفير والنصائح، مساعد ذكي لمشروع طالب اسمه سيف في الصف الثاني الاعدادي عن ترشيد الكهرباء في مصر. رد بالعامية المصرية البسيطة، قصير وواضح، بنقط، واذكر ارقام توفير بالجنيه. ";
+if(last){system+="بيانات بيت المستخدم: استهلاك شهري "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". "}
+let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+SITE_KEY,"Content-Type":"application/json","HTTP-Referer":location.href,"X-Title":"Smart Energy Saver"},body:JSON.stringify({model:"google/gemini-2.0-flash-001:free",messages:[{role:"system",content:system},{role:"user",content:q}],temperature:0.7,max_tokens:800})});
 let data=await res.json();
-if(data.error){ansEl.textContent="المفتاح فيه مشكلة: "+(data.error.message||"راجع المفتاح")+"\n\nهرد عليك بالوضع الذكي:\n\n"+localAnswer(q);srcEl.textContent="❌ المفتاح غلط أو الرصيد خلص - راجع OpenRouter";return}
+if(data.error){ansEl.textContent="حصل مشكلة في الذكاء، هرد عليك بالوضع الذكي:\n\n"+localAnswer(q);srcEl.textContent="الذكاء الحقيقي مش شغال دلوقتي - رديت بالوضع الذكي";return}
 let txt=data.choices?.[0]?.message?.content||"";
-ansEl.textContent=txt;srcEl.textContent="✅ إجابة حقيقية من "+model+" عن طريق OpenRouter - مساعد التوفير والنصائح";
+ansEl.textContent=txt;srcEl.textContent="✅ إجابة حقيقية من Gemini Flash عن طريق OpenRouter";
 }catch(e){ansEl.textContent=localAnswer(q);srcEl.textContent="النت ضعيف، رديت بالوضع الذكي"}
 }
-function saveKey(){let k=document.getElementById("apiKey").value.trim();if(!k){alert("الصق مفتاح OpenRouter الأول");return}if(!k.startsWith("sk-or-")){if(!confirm("المفتاح ده مش شكله مفتاح OpenRouter، هو بيبدأ بـ sk-or-v1- .. متأكد انه صح وعايز تحفظه؟"))return}localStorage.setItem("openrouter_key",k);document.getElementById("keyStatus").textContent="✅ تم حفظ مفتاح OpenRouter في متصفحك بس. دلوقتي مساعد التوفير والنصائح بقى Gemini Flash حقيقي. جرب اسأله أي حاجة.";document.getElementById("apiKey").value="";alert("تم! دلوقتي اسأل أي سؤال وهيرد عليك Gemini Flash")}
-function deleteKey(){localStorage.removeItem("openrouter_key");document.getElementById("keyStatus").textContent="تم مسح المفتاح.";alert("تم مسح المفتاح")}
 function showTip(txt){document.getElementById("tipAnswer").textContent=txt;document.getElementById("tipResult").hidden=false}
 function updateLive(){let b=Number(document.getElementById("beforeRange").value),a=Number(document.getElementById("afterRange").value);document.getElementById("beforeVal").textContent=b;document.getElementById("afterVal").textContent=a;let diff=b-a,pct=b?Math.round(diff/b*100):0;document.getElementById("liveSaving").textContent=diff>0?`وفرت ${diff} ك.و.س - ${pct}%`:"لسه موفرتش - قلل اللي تحت";document.getElementById("liveBar").style.width=Math.max(pct,0)+"%"}document.getElementById("beforeRange").oninput=updateLive;document.getElementById("afterRange").oninput=updateLive;updateLive();
-document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;document.getElementById("saveKeyBtn").onclick=saveKey;document.getElementById("deleteKeyBtn").onclick=deleteKey;
-if(localStorage.getItem("openrouter_key")){document.getElementById("keyStatus").textContent="✅ مفتاح OpenRouter محفوظ عندك، و Gemini Flash شغال."}
-addDevice();addDevice();
+document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;addDevice();addDevice();
 </script>
 </body>
 </html>
