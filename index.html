@@ -85,13 +85,6 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 <textarea id="question" rows="2" placeholder="مثال: السخان الغاز اعمل فيه ايه؟"></textarea>
 <button class="main green" id="askBtn" type="button">اسأل مساعد التوفير والنصائح ✨</button>
 <div id="aiResult" hidden style="margin-top:14px"><p id="aiAnswer" class="ai-box"></p><p id="aiSource" style="font-size:12px;color:#6b7280"></p></div>
-<div class="keybox">
-<label style="margin-top:0">🔑 ربط الذكاء الاصطناعي الحقيقي - المفتاح بيتحفظ في متصفحك انت بس، مش في الموقع</label>
-<input id="apiKey" type="password" placeholder="الصق مفتاح Gemini هنا - مثال: AIza...">
-<button class="main dark" id="saveKeyBtn" type="button" style="margin-top:10px">حفظ المفتاح وتشغيل الذكاء الحقيقي 🔐</button>
-<p id="keyStatus" style="font-size:13px;color:#059669;margin:8px 0 0"></p>
-<p style="font-size:12px;color:#6b7280;line-height:1.8;margin:8px 0 0">ازاي تجيب المفتاح مجانا؟ افتح aistudio.google.com/apikey ودوس Create API Key وانسخه والصقه هنا. اوعى تبعت المفتاح لحد، ولا تحطه في جيت هب.</p>
-</div>
 </section>
 <section class="card" id="exp">
 <h2>🔬 جرّب التوفير بنفسك - حرّك وشوف</h2>
@@ -115,16 +108,10 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </main>
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة</footer>
 <script>
-// ===== المفتاح الجديد - بيخلي الذكاء يشتغل عند الكل من غير ما حد يحط مفتاح =====
-const SITE_KEY = "حط_مفتاحك_هنا_sk-or-v1-...";
-const OPENROUTER_MODELS = [
-  "meta-llama/llama-3.3-70b-instruct:free",
-  "google/gemini-2.0-flash-exp:free",
-  "google/gemini-flash-1.5-8b",
-  "deepseek/deepseek-chat-v3.1:free"
-];
-// =========================================================================
-
+//==============المفتاح بتاع الذكاء الاصطناعي=============
+const SITE_KEY = "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";
+const OPENROUTER_MODELS = ["meta-llama/llama-3.3-70b-instruct:free","google/gemini-2.0-flash-exp:free","google/gemini-flash-1.5-8b","deepseek/deepseek-chat-v3.1:free"];
+// ==========================================================
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
 let last=null;
 function addDevice(){const box=document.createElement("div");box.className="device";const sel=document.createElement("select");appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز مش موجود";sel.appendChild(co);const watt=document.createElement("input");watt.type="number";watt.value="1500";const qty=document.createElement("input");qty.type="number";qty.value="1";const hours=document.createElement("input");hours.type="number";hours.value="5";const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt}sel.addEventListener("change",upd);const del=document.createElement("button");del.className="remove";del.textContent="🗑️ حذف";del.onclick=()=>box.remove();box.innerHTML="<label>1 - نوع الجهاز</label>";box.append(sel);let g=document.createElement("div");g.className="grid";let c1=document.createElement("div");c1.innerHTML="<label>2 - القدرة بالوات (W)</label>";c1.append(watt);let c2=document.createElement("div");c2.innerHTML="<label>3 - العدد</label>";c2.append(qty);let c3=document.createElement("div");c3.innerHTML="<label>4 - ساعات في اليوم</label>";c3.append(hours);g.append(c1,c2,c3);box.append(name,g,del);document.getElementById("devices").appendChild(box)}
@@ -148,9 +135,7 @@ let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById(
 document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير والنصائح بيفكر...";srcEl.textContent="";
 let context="انت مساعد التوفير والنصائح، مشروع طالب اسمه سيف في الصف الثاني الاعدادي عن ترشيد الكهرباء في مصر. رد بالعامية المصرية البسيطة، قصير وواضح، واذكر ارقام توفير بالجنيه. ";
 if(last){context+="بيانات بيت المستخدم: استهلاك شهري "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". "}
-
-// 1 - جرب OpenRouter بالمفتاح اللي جوه الموقع - يشتغل عند الكل
-if(SITE_KEY && !SITE_KEY.includes("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")){
+if(SITE_KEY && !SITE_KEY.includes("حط_مفتاحك_هنا")){
   for(let model of OPENROUTER_MODELS){
     try{
       let res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+SITE_KEY,"Content-Type":"application/json","HTTP-Referer":"https://saifabosada4-sudo.github.io/smart-energy-saver/","X-Title":"Smart Energy Saver"},body:JSON.stringify({model:model,messages:[{role:"system",content:context},{role:"user",content:q}]})});
@@ -160,32 +145,15 @@ if(SITE_KEY && !SITE_KEY.includes("sk-or-v1-14776b1264c1416e4d8ebd6d17e8f70a8ddc
         srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي - مساعد التوفير والنصائح ("+model+")";
         return;
       }
-    }catch(e){ console.log("فشل موديل",model); }
+    }catch(e){}
   }
 }
-
-// 2 - جرب مفتاح Gemini اللي المستخدم حاطه بنفسه
-let key=localStorage.getItem("tawfeer_key")||"";
-if(key){
-  try{
-    let res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+key,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:context+"\nسؤال المستخدم: "+q}]}]})});
-    let data=await res.json();
-    if(!data.error){
-      let txt=data.candidates?.[0]?.content?.parts?.[0]?.text||"";
-      if(txt){ ansEl.textContent=txt; srcEl.textContent="✅ إجابة من الذكاء الاصطناعي الحقيقي - مساعد التوفير والنصائح"; return; }
-    }
-  }catch(e){}
-}
-
-// 3 - لو كل حاجة وقفت، رجع للوضع الذكي القديم
 ansEl.textContent=localAnswer(q);
-srcEl.textContent="وضع ذكي - حط المفتاح تحت عشان يبقى ذكاء حقيقي 100%";
+srcEl.textContent="وضع ذكي";
 }
-function saveKey(){let k=document.getElementById("apiKey").value.trim();if(!k){alert("الصق المفتاح الأول");return}localStorage.setItem("tawfeer_key",k);document.getElementById("keyStatus").textContent="✅ تم حفظ المفتاح في متصفحك بس، ودلوقتي مساعد التوفير والنصائح بقى ذكاء حقيقي. جرب اسأله أي حاجة.";document.getElementById("apiKey").value="";alert("تم! دلوقتي اسأل أي سؤال وهيرد عليك ذكاء حقيقي")}
 function showTip(txt){document.getElementById("tipAnswer").textContent=txt;document.getElementById("tipResult").hidden=false}
 function updateLive(){let b=Number(document.getElementById("beforeRange").value),a=Number(document.getElementById("afterRange").value);document.getElementById("beforeVal").textContent=b;document.getElementById("afterVal").textContent=a;let diff=b-a,pct=b?Math.round(diff/b*100):0;document.getElementById("liveSaving").textContent=diff>0?`وفرت ${diff} ك.و.س - ${pct}%`:"لسه موفرتش - قلل اللي تحت";document.getElementById("liveBar").style.width=Math.max(pct,0)+"%"}document.getElementById("beforeRange").oninput=updateLive;document.getElementById("afterRange").oninput=updateLive;updateLive();
-document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;document.getElementById("saveKeyBtn").onclick=saveKey;
-if(localStorage.getItem("tawfeer_key")){document.getElementById("keyStatus").textContent="✅ المفتاح محفوظ عندك، والذكاء الحقيقي شغال."}
+document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;
 addDevice();addDevice();
 </script>
 </body>
