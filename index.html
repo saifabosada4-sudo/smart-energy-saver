@@ -20,7 +20,6 @@ main{max-width:980px;margin:auto;padding:16px 12px}
 label{display:block;font-weight:800;margin:14px 0 6px;font-size:14px}
 input,select,textarea{width:100%;padding:13px;border:1.8px solid #e5e7eb;border-radius:12px;font-size:16px;background:#f9fafb;outline:none}
 input:focus,select:focus,textarea:focus{border-color:#2563eb;background:#fff}
-input[type=range]{padding:0;accent-color:#2563eb}
 button.main{border:0;border-radius:12px;padding:14px;background:#2563eb;color:#fff;font-size:16px;font-weight:800;width:100%;margin-top:14px;cursor:pointer}
 button.dark{background:#111827} button.green{background:#059669} button.gold{background:#facc15;color:#111827}
 .device{background:#f8fafc;padding:16px;border:1.5px solid #e5e7eb;border-radius:16px;margin:10px 0}
@@ -40,14 +39,13 @@ button.dark{background:#111827} button.green{background:#059669} button.gold{bac
 .tips{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:14px;text-align:center;line-height:1.7;cursor:pointer}
 .tip div{font-size:30px}
-.big{font-size:32px;font-weight:900;color:#059669;text-align:center;margin:10px 0}
 footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 @media(max-width:650px){.grid,.kpis,.tips{grid-template-columns:1fr 1fr}header h1{font-size:26px}}
 </style>
 </head>
 <body>
 <header><div style="font-size:50px">⚡</div><h1>Smart Energy <span>Saver</span></h1><p>جرّب بنفسك .. الفعل هو اللي بيتكلم 👇</p><button onclick="document.getElementById('calc').scrollIntoView({behavior:'smooth'})">جرّب الحاسبة الآن ↓</button></header>
-<nav><a href="#calc">🧮 الحاسبة</a><a href="#ai">🧠 مساعد التوفير</a><a href="#exp">🔬 جرّب التوفير</a><a href="#tips">💡 النصائح</a></nav>
+<nav><a href="#calc">🧮 الحاسبة</a><a href="#ai">🧠 مساعد التوفير</a><a href="#tips">💡 النصائح</a></nav>
 <main>
 <section class="card" id="calc">
 <h2>🧮 الحاسبة - جرّب بنفسك</h2>
@@ -72,43 +70,33 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </section>
 <section class="card" id="ai" style="border:2px solid #059669">
 <h2>🧠 مساعد التوفير والنصائح - ذكاء اصطناعي حقيقي</h2>
-<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل أي سؤال عن التوفير، والمساعد هيرد عليك فورا.</p>
+<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل أي سؤال، والمساعد هيقولك تعمل ايه بالظبط عشان توفر.</p>
 <div class="quick">
-<button type="button" onclick="quickAsk('السخان الغاز اعمل فيه ايه؟')">🔥 سخان غاز</button>
+<button type="button" onclick="quickAsk('فاتورتي 900 جنيه، اعملي خطة توفير؟')">💸 فاتورتي 900 اعمل ايه؟</button>
+<button type="button" onclick="quickAsk('السخان الغاز اعمل فيه ايه عشان اوفر؟')">🔥 سخان غاز</button>
 <button type="button" onclick="quickAsk('كيف أقلل استهلاك التكييف؟')">❄️ التكييف</button>
-<button type="button" onclick="quickAsk('فاتورتي عالية اعمل ايه؟')">💸 فاتورتي عالية</button>
 <button type="button" onclick="quickAsk('هل اللمبة الليد بتوفر فعلا؟')">💡 لمبة ليد</button>
 </div>
 <label>اكتب سؤالك لمساعد التوفير والنصائح</label>
-<textarea id="question" rows="2" placeholder="مثال: السخان الغاز اعمل فيه ايه؟"></textarea>
+<textarea id="question" rows="2" placeholder="مثال: فاتورتي 900 جنيه، اعمل ايه عشان اوفر؟"></textarea>
 <button class="main green" id="askBtn" type="button">اسأل مساعد التوفير والنصائح ✨</button>
 <div id="aiResult" hidden style="margin-top:14px"><p id="aiAnswer" class="ai-box"></p><p id="aiSource" style="font-size:12px;color:#6b7280"></p></div>
-</section>
-<section class="card" id="exp">
-<h2>🔬 جرّب التوفير بنفسك - حرّك وشوف</h2>
-<label>⚡ استهلاكك دلوقتي: <b id="beforeVal">300</b> ك.و.س</label>
-<input id="beforeRange" type="range" min="50" max="600" value="300">
-<label>🌱 بعد الترشيد: <b id="afterVal">210</b> ك.و.س</label>
-<input id="afterRange" type="range" min="20" max="600" value="210">
-<div class="big" id="liveSaving">وفرت 90 ك.و.س - 30%</div>
-<div class="bar" style="height:14px"><i id="liveBar" style="width:30%"></i></div>
 </section>
 <section class="card" id="tips">
 <h2>💡 دوس على أي نصيحة وشوف هتوفر كام</h2>
 <div class="tips">
-<div class="tip" onclick="showTip('❄️ التكييف على 24\nهتوفر 6% على كل درجة.\nلو قللته ساعتين هتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('💡 لمبة LED\nالعادية 60 وات، الليد 12 وات.\nهتوفر 80% من الإضاءة.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔥 السخان ساعة بس\nمتسيبوش شغال طول اليوم.\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔌 افصل الشاحن\nالشاحن بيسحب كهربا حتى لو مش بيشحن.')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('❄️ عشان توفر في التكييف اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\nهتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('💡 عشان توفر في الاضاءة اعمل كده:\n1- غير كل اللمبات العادية لـ LED\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\nالعادية 60 وات، الليد 12 وات، هتوفر 80%.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('🔥 عشان توفر في السخان اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام واطفيه\n2- متسيبوش شغال طول اليوم\n3- وطي الترموستات\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('🔌 عشان توفر اعمل كده:\n1- افصل الشاحن بعد ما يخلص\n2- افصل الراوتر وانت نايم\n3- متسيبش التلفزيون على وضع الاستعداد\nالشاحن بيسحب كهربا حتى لو مش بيشحن.')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
 </div>
 <div id="tipResult" hidden style="margin-top:14px"><p id="tipAnswer" class="ai-box"></p></div>
 </section>
 </main>
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة</footer>
 <script>
-// حط مفتاحك هنا متقسم نصين
-const K1 = "sk-or-v1-14776b1264c1416e4d8ebd6d17e8f7";
-const K2 = "0a8ddc7cec81dfaa83466352cc94a83dd4";
+const K1 = "sk-or-v1-14776b1264c1416e4d8ebd";
+const K2 = "6d17e8f70a8ddc7cec81dfaa83466352cc94a83dd4";
 const SITE_KEY = K1 + K2;
 const OPENROUTER_MODELS = ["meta-llama/llama-3.3-70b-instruct:free","google/gemini-2.0-flash-exp:free","deepseek/deepseek-chat-v3.1:free"];
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
@@ -148,24 +136,25 @@ document.getElementById("results").scrollIntoView({behavior:"smooth"})
 }
 function quickAsk(q){document.getElementById("question").value=q;askAI()}
 function localAnswer(q){
-let t="";if(last){t+="📊 بيتك: "+last.monthly+" ك.و.س | "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
+let t="";
+if(last){t+="📊 بيتك دلوقتي: "+last.monthly+" ك.و.س | "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
 let l=q.toLowerCase();
-if(l.includes("غاز")&&(l.includes("سخان")||l.includes("سخن"))){t+="🔥 سخان غاز:\n- مش بيستهلك كهربا كتير، بيستهلك غاز.\n- لازم تهوية كويسة.\n- وطي الشعلة، ومتسيبش المية مفتوحة."}
-else if(l.includes("سخان")){t+="⚡ سخان كهربا - 2000 وات:\n- شغله ساعة بس واطفيه.\n- هيوفرلك حوالي 120 جنيه."}
-else if(l.includes("تكييف")||l.includes("تكيف")){t+="❄️ التكييف:\n- على 24، كل درجة أقل = 6% زيادة.\n- نظف الفلتر.\n- هتوفر "+(last?last.saving:"150")+" جنيه."}
-else if(l.includes("فاتورة")||l.includes("عالية")||l.includes("توفير")){t+="💰 قلل فاتورتك:\n1- LED بدل العادية\n2- افصل الشاحن\n3- ركز على "+(last?last.biggest:"التكييف")}
-else if(l.includes("لمبة")||l.includes("ليد")){t+="💡 LED:\n- العادية 60 وات، الليد 12 وات.\n- 7 لمبات: العادية 63 ج، الليد 12 ج."}
-else if(l.includes("ثلاجة")||l.includes("تلاجة")){t+="🧊 الثلاجة:\n- متفتحهاش كتير.\n- متحطش أكل سخن."}
-else{t+="💡 اسألني عن: التكييف، السخان الغاز، السخان الكهربا، الفاتورة، اللمبة"}
+if(l.includes("غاز")&&(l.includes("سخان")||l.includes("سخن"))){t+="🔥 سخان غاز - اعمل كده عشان توفر:\n1- وطي الشعلة على النص مش على الآخر\n2- متسيبش المية السخنة مفتوحة وانت بتغسل\n3- لازم تهوية كويسة للحمام\n4- لو المية سخنة اوي، وطي السخان\nهتوفر حوالي 40 جنيه في الغاز شهريا."}
+else if(l.includes("سخان")){t+="⚡ سخان كهربا - اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام\n2- اطفيه بعدها على طول، متسيبوش شغال\n3- وطي الترموستات\n4- لو عندك غاز، السخان الغاز اوفر\nهتوفر حوالي 120 جنيه."}
+else if(l.includes("تكييف")||l.includes("تكيف")){t+="❄️ التكييف - اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك\n4- شغله 5 ساعات بدل 8\nهتوفر "+(last?last.saving:"150")+" جنيه."}
+else if(l.includes("فاتورة")||l.includes("900")||l.includes("عالية")||l.includes("توفير")){t+="💰 فاتورتك عالية - اعمل الخطة دي بالترتيب:\n1- غير كل اللمبات العادية لـ LED النهاردة\n2- التكييف على 24 ونظف الفلتر\n3- السخان ساعة واحدة بس واطفيه\n4- افصل كل الشواحن بعد الشحن\n5- ركز على "+(last?last.biggest:"التكييف")+" لانه اكتر جهاز بيستهلك\nلو عملت كده هتوفر حوالي 200 جنيه."}
+else if(l.includes("لمبة")||l.includes("ليد")){t+="💡 اللمبة الليد - اعمل كده:\n1- غير العادية 60 وات لـ LED 12 وات\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\n7 لمبات: العادية 63 ج، الليد 12 ج، هتوفر 51 ج."}
+else if(l.includes("ثلاجة")||l.includes("تلاجة")){t+="🧊 الثلاجة - اعمل كده:\n1- متفتحهاش كتير\n2- متحطش أكل سخن جواها\n3- سيب فراغ وراها للتهوية\n4- اظبطها على النص"}
+else{t+="💡 اعمل كده عشان توفر:\n1- غير لمباتك لـ LED\n2- التكييف على 24\n3- السخان ساعة بس\n4- افصل الشاحن\nاسألني عن جهاز معين وهقولك تعمل ايه فيه بالظبط."}
 return t;
 }
 async function askAI(){
 let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return}
 let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById("aiSource");
 document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير والنصائح بيفكر...";srcEl.textContent="";
-let context="انت خبير ترشيد كهرباء في مصر، اسمك مساعد التوفير والنصائح. رد بالعامية المصرية البسيطة زي ما بتكلم صاحبك. رد في 5 نقط بالظبط، كل نقطة قصيرة ومفيدة، واذكر في الاخر كام جنيه هيتوفر. ";
-if(last){context+="بيانات بيت المستخدم دلوقتي: استهلاك شهري "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز بيستهلك هو "+last.biggest+"، وهيوفر "+last.saving+" جنيه لو رشّد. استخدم الارقام دي في ردك. "}
-let fullPrompt=context+"\nسؤال المستخدم: "+q;
+let context="انت خبير ترشيد كهرباء في مصر. مهمتك مش تشرح، مهمتك تقول للمستخدم يعمل ايه بالظبط. رد بالعامية المصرية. صيغة ردك لازم تكون كده: 'اعمل كده عشان توفر:' وبعدها 4 خطوات مرقمة، كل خطوة تبدأ بفعل: 'اظبط، نظف، اطفي، غير، وطي، افصل'. ممنوع ترد رد عام من غير خطوات. في الآخر اكتب 'هتوفر حوالي X جنيه'. ";
+if(last){context+="بيانات بيت المستخدم: استهلاك "+last.monthly+" ك.و.س، تكلفة "+last.cost+" جنيه، اكتر جهاز "+last.biggest+". استخدمها. "}
+let fullPrompt=context+"\nسؤال المستخدم: "+q+"\nرد بخطة عملية: اعمل ايه بالظبط؟";
 if(SITE_KEY && SITE_KEY.startsWith("sk-or") && !SITE_KEY.includes("حط_")){
   for(let model of OPENROUTER_MODELS){
     try{
@@ -190,9 +179,8 @@ ansEl.textContent=localAnswer(q);
 srcEl.textContent="";
 }
 function showTip(txt){document.getElementById("tipAnswer").textContent=txt;document.getElementById("tipResult").hidden=false}
-function updateLive(){let b=Number(document.getElementById("beforeRange").value),a=Number(document.getElementById("afterRange").value);document.getElementById("beforeVal").textContent=b;document.getElementById("afterVal").textContent=a;let diff=b-a,pct=b?Math.round(diff/b*100):0;document.getElementById("liveSaving").textContent=diff>0?`وفرت ${diff} ك.و.س - ${pct}%`:"لسه موفرتش - قلل اللي تحت";document.getElementById("liveBar").style.width=Math.max(pct,0)+"%"}document.getElementById("beforeRange").oninput=updateLive;document.getElementById("afterRange").oninput=updateLive;updateLive();
 document.getElementById("addBtn").onclick=addDevice;document.getElementById("calcBtn").onclick=calculate;document.getElementById("askBtn").onclick=askAI;
 addDevice();
 </script>
 </body>
-  </html>
+</html>
