@@ -53,8 +53,7 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 <div class="formula">kWh = <span>W × عدد × ساعات ÷ 1000</span></div>
 <div id="devices"></div>
 <button class="main dark" type="button" id="addBtn">+ جهاز جديد</button>
-<label>💰 سعر الكيلووات بالجنيه</label>
-<input id="price" type="number" value="2.5">
+<p style="background:#eff6ff;padding:12px;border-radius:12px;font-size:14px;line-height:1.8">✅ الحساب أوتوماتيك <b>بشرائح الكهربا في مصر - أغسطس 2026</b>. اكتب الوات والساعات بس، وهو يحسب الشريحة والفاتورة لوحده.</p>
 <button class="main" id="calcBtn" type="button">احسب 📊</button>
 <div id="results" class="result" hidden>
 <h3 style="margin:0">📄 نتيجتك</h3>
@@ -64,7 +63,8 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 <div class="kpi">التكلفة<br><strong id="cost"></strong></div>
 <div class="kpi">أكتر جهاز<br><strong id="biggest"></strong></div>
 </div>
-<p>💰 هتوفر: <strong id="saving" style="color:#facc15"></strong></p>
+<p>📊 شريحتك: <strong id="slabText" style="color:#facc15"></strong></p>
+<p>💰 هتوفر (20%): <strong id="saving" style="color:#facc15"></strong></p>
 <div id="chart"></div>
 <button class="main gold" type="button" onclick="showSavePlan()">💡 كيف أوفر؟ دوس هنا</button>
 <div id="savePlan" hidden><p id="savePlanText" class="save-box"></p></div>
@@ -72,7 +72,7 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </section>
 <section class="card" id="ai" style="border:2px solid #059669">
 <h2>🧠 مساعد التوفير والنصائح</h2>
-<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل عن أي جهاز، هيشرحهولك ويقولك تعمل ايه عشان توفر.</p>
+<p style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 12px">اسأل عن أي جهاز، هيشرحهولك على حسب ساعاتك ويقولك تعمل ايه عشان توفر.</p>
 <div class="quick">
 <button type="button" onclick="quickAsk('اشرحلي التكييف')">❄️ اشرحلي التكييف</button>
 <button type="button" onclick="quickAsk('اشرحلي السخان')">🔥 اشرحلي السخان</button>
@@ -87,9 +87,9 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 <section class="card" id="tips">
 <h2>💡 دوس على أي نصيحة وشوف هتوفر كام</h2>
 <div class="tips">
-<div class="tip" onclick="showTip('❄️ التكييف 1.5 حصان = 1500 وات.\nعشان توفر اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\nهتوفر حوالي 90 جنيه شهريا.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('💡 اللمبة العادية = 60 وات، الليد = 12 وات.\nعشان توفر اعمل كده:\n1- غير كل اللمبات العادية لـ LED\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\nهتوفر 80%.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
-<div class="tip" onclick="showTip('🔥 السخان الكهربائي = 2000 وات.\nعشان توفر اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام واطفيه\n2- متسيبوش شغال طول اليوم\n3- وطي الترموستات\nهتوفر حوالي 120 جنيه شهريا.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('❄️ التكييف 1.5 حصان = 1500 وات.\nعشان توفر اعمل كده:\n1- اظبطه على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\nهتوفر حوالي 20% من فاتورتك.')"><div>❄️</div><b>التكييف 24</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('💡 اللمبة العادية = 60 وات، الليد = 12 وات.\nعشان توفر اعمل كده:\n1- غير كل اللمبات العادية لـ LED\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\nهتوفر 80% من استهلاك اللمبات.')"><div>💡</div><b>لمبة LED</b><p>دوس وشوف</p></div>
+<div class="tip" onclick="showTip('🔥 السخان الكهربائي = 2000 وات.\nعشان توفر اعمل كده:\n1- شغله ساعة واحدة بس قبل الحمام واطفيه\n2- متسيبوش شغال طول اليوم\n3- وطي الترموستات\nهتوفر حوالي 20% من فاتورتك.')"><div>🔥</div><b>السخان ساعة</b><p>دوس وشوف</p></div>
 <div class="tip" onclick="showTip('🔌 الشاحن = 15 وات بس، بس بيسحب كهربا حتى لو مش بيشحن.\nعشان توفر اعمل كده:\n1- افصل الشاحن بعد ما يخلص\n2- افصل الراوتر وانت نايم\n3- متسيبش التلفزيون على وضع الاستعداد')"><div>🔌</div><b>افصل الشاحن</b><p>دوس وشوف</p></div>
 </div>
 <div id="tipResult" hidden style="margin-top:14px"><p id="tipAnswer" class="ai-box"></p></div>
@@ -97,17 +97,29 @@ footer{text-align:center;padding:24px;color:#6b7280;line-height:2}
 </main>
 <footer><b>⚡ Smart Energy Saver - مساعد التوفير والنصائح</b><br>سيف جمال عبد الستار عبده • الصف الثاني الإعدادي • الجيزة</footer>
 <script>
-const K1 = "sk-or-v1-14776b1264c1416e4d8ebd6d17e8f70a";
-const K2 = "8ddc7cec81dfaa83466352cc94a83dd4";
+const K1 = "sk-or-v1-14776b1264c1416e4";
+const K2 = "d8ebd6d17e8f70a8ddc7cec81dfaa83466352cc94a83dd4";
 const SITE_KEY = K1 + K2;
 const OPENROUTER_MODELS = ["meta-llama/llama-3.3-70b-instruct:free","google/gemini-2.0-flash-exp:free","deepseek/deepseek-chat-v3.1:free"];
 const appliances=[{name:"تكييف 1.5 حصان",watt:1500,icon:"❄️"},{name:"تكييف 2.25 حصان",watt:2200,icon:"❄️"},{name:"سخان كهربائي",watt:2000,icon:"🔥"},{name:"ثلاجة",watt:200,icon:"🧊"},{name:"ديب فريزر",watt:350,icon:"🧊"},{name:"غسالة",watt:500,icon:"👕"},{name:"مروحة سقف",watt:75,icon:"🌀"},{name:"تلفزيون",watt:100,icon:"📺"},{name:"لمبة عادية",watt:60,icon:"💡"},{name:"لمبة LED",watt:12,icon:"💡"},{name:"ميكروويف",watt:1200,icon:"🍲"},{name:"غلاية مياه",watt:1800,icon:"🫖"},{name:"مكواة",watt:1000,icon:"👔"},{name:"كمبيوتر",watt:300,icon:"🖥️"},{name:"لابتوب",watt:65,icon:"💻"},{name:"بلايستيشن",watt:150,icon:"🎮"},{name:"شاحن موبايل",watt:15,icon:"📱"},{name:"راوتر",watt:10,icon:"📶"}];
 let last=null;
+function calcCostSlabs(monthly){
+  let cost=0,slabName="",service=0;
+  if(monthly<=50){cost=monthly*0.68;slabName="الشريحة الأولى (0 - 50 كيلو) - 0.68 جنيه للكيلو";service=1;}
+  else if(monthly<=100){cost=50*0.68+(monthly-50)*0.8736;slabName="الشريحة التانية (51 - 100 كيلو) - 0.87 جنيه للكيلو";service=2;}
+  else if(monthly<=200){cost=monthly*1.064;slabName="الشريحة التالتة (0 - 200 كيلو) - 1.06 جنيه للكيلو - بتتحسب من الصفر";service=6;}
+  else if(monthly<=350){cost=200*1.064+(monthly-200)*1.736;slabName="الشريحة الرابعة (201 - 350 كيلو) - 1.74 جنيه للكيلو";service=11;}
+  else if(monthly<=650){cost=200*1.064+150*1.736+(monthly-350)*2.184;slabName="الشريحة الخامسة (351 - 650 كيلو) - 2.18 جنيه للكيلو";service=15;}
+  else if(monthly<=1000){cost=monthly*2.352;slabName="الشريحة السادسة (0 - 1000 كيلو) - 2.35 جنيه للكيلو - بتتحسب من الصفر";service=25;}
+  else{cost=monthly*2.89;slabName="الشريحة السابعة (أكتر من 1000 كيلو) - 2.89 جنيه للكيلو - من غير دعم";service=40;}
+  let total=cost+service;
+  return{cost:total,costWithoutService:cost,service:service,slabName:slabName,avg:monthly>0?total/monthly:0};
+}
 function addDevice(){const box=document.createElement("div");box.className="device";const sel=document.createElement("select");appliances.forEach((a,i)=>{let o=document.createElement("option");o.value=i;o.textContent=a.icon+" "+a.name+" - "+a.watt+" وات";sel.appendChild(o)});let co=document.createElement("option");co.value="custom";co.textContent="➕ جهاز مش موجود";sel.appendChild(co);const watt=document.createElement("input");watt.type="number";watt.value="1500";const qty=document.createElement("input");qty.type="number";qty.value="1";const hours=document.createElement("input");hours.type="number";hours.value="5";const name=document.createElement("input");name.placeholder="اسم الجهاز";name.hidden=true;function upd(){let c=sel.value==="custom";name.hidden=!c;watt.readOnly=!c;if(!c)watt.value=appliances[Number(sel.value)].watt}sel.addEventListener("change",upd);const del=document.createElement("button");del.className="remove";del.textContent="🗑️ حذف";del.onclick=()=>box.remove();box.innerHTML="<label>1 - نوع الجهاز</label>";box.append(sel);let g=document.createElement("div");g.className="grid";let c1=document.createElement("div");c1.innerHTML="<label>2 - القدرة بالوات (W)</label>";c1.append(watt);let c2=document.createElement("div");c2.innerHTML="<label>3 - العدد</label>";c2.append(qty);let c3=document.createElement("div");c3.innerHTML="<label>4 - ساعات في اليوم</label>";c3.append(hours);g.append(c1,c2,c3);box.append(name,g,del);document.getElementById("devices").appendChild(box)}
 function calculate(){
 let devices=document.querySelectorAll(".device");
 if(devices.length===0){alert("ضيف جهاز الأول");return;}
-let daily=0,biggest=0,bigName="",saveKwh=0,list=[];
+let daily=0,biggest=0,bigName="",list=[];
 let hasError=false;
 devices.forEach(row=>{
 if(hasError) return;
@@ -119,19 +131,23 @@ let watt=Number(ins[1].value),qty=Number(ins[2].value),hours=Number(ins[3].value
 if(!name||!watt||watt<=0||!qty||qty<1||hours<0||hours>24){alert("راجع البيانات في جهاز: "+(name||"من غير اسم"));hasError=true;return;}
 let e=watt*qty*hours/1000;
 daily+=e;
-saveKwh+=watt*qty*Math.min(hours,1)/1000;
 if(e>biggest){biggest=e;bigName=name}
-list.push({name,energy:e})
+list.push({name,energy:e,hours:hours,qty:qty,watt:watt})
 });
 if(hasError) return;
-let monthly=daily*30,price=Number(document.getElementById("price").value)||2.5,cost=monthly*price,saving=saveKwh*30*price;
-let afterCost=Math.max(cost-saving,0);
-last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:saving.toFixed(2),after:afterCost.toFixed(2),list:list};
+let monthly=daily*30;
+let calc=calcCostSlabs(monthly);
+let cost=calc.cost;
+let savingKwh=monthly*0.20;
+let savingCost=calcCostSlabs(monthly).cost - calcCostSlabs(monthly - savingKwh).cost;
+let afterCost=Math.max(cost-savingCost,0);
+last={monthly:monthly.toFixed(2),cost:cost.toFixed(2),biggest:bigName,saving:savingCost.toFixed(2),after:afterCost.toFixed(2),list:list,slab:calc.slabName,avg:calc.avg.toFixed(2)};
 document.getElementById("daily").textContent=daily.toFixed(2)+" ك.و.س";
 document.getElementById("monthly").textContent=monthly.toFixed(2)+" ك.و.س";
 document.getElementById("cost").textContent=cost.toFixed(2)+" جنيه";
 document.getElementById("biggest").textContent=bigName;
-document.getElementById("saving").textContent=saving.toFixed(2)+" جنيه";
+document.getElementById("slabText").textContent=calc.slabName+" | خدمة عملاء "+calc.service+" جنيه | متوسط "+calc.avg.toFixed(2)+" جنيه/كيلو";
+document.getElementById("saving").textContent=savingCost.toFixed(2)+" جنيه";
 let max=Math.max(...list.map(x=>x.energy),1);
 document.getElementById("chart").innerHTML=list.map(d=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>${d.name}</span><span>${d.energy.toFixed(2)} ك.و.س</span></div><div class="bar"><i style="width:${Math.round(d.energy/max*100)}%"></i></div></div>`).join("");
 document.getElementById("savePlan").hidden=true;
@@ -140,20 +156,85 @@ document.getElementById("results").scrollIntoView({behavior:"smooth"})
 }
 function showSavePlan(){
 if(!last){alert("احسب الأول");return}
-let b=last.biggest||"";
-let plan="💡 خطة التوفير لبيتك:\n\n";
+let plan="💡 خطة التوفير لبيتك كلها:\n\n";
 plan+="📊 بتدفع دلوقتي: "+last.cost+" جنيه\n";
-plan+="💰 هتوفر: "+last.saving+" جنيه\n";
+plan+="📊 شريحتك: "+last.slab+"\n";
+plan+="💰 هتوفر (20%): "+last.saving+" جنيه\n";
 plan+="✅ هتدفع بعد التوفير: "+last.after+" جنيه\n\n";
-plan+="اعمل كده بالظبط:\n";
-if(b.includes("تكييف")){plan+="1- اظبط التكييف على 24 مش 18\n2- نظف الفلتر كل اسبوعين\n3- اقفل الباب والشباك وانت مشغله\n4- شغله 5 ساعات بس بدل 8\n"}
-else if(b.includes("لمبة")){plan+="1- غير كل اللمبات العادية لـ LED النهاردة\n2- اطفي النور وانت طالع من الاوضة\n3- استخدم نور الشمس بالنهار\n4- اللمبة العادية 60 وات، الليد 12 وات بس\n"}
-else if(b.includes("سخان")){plan+="1- شغل السخان ساعة واحدة بس قبل الحمام\n2- اطفيه بعدها على طول\n3- وطي الترموستات\n4- لو عندك غاز، السخان الغاز اوفر\n"}
-else if(b.includes("ديب")||b.includes("ثلاجة")){plan+="1- متفتحش الثلاجة / الديب فريزر كتير\n2- متحطش أكل سخن جواها\n3- سيب فراغ وراها للتهوية\n4- اظبطها على النص\n"}
-else if(b.includes("غسالة")){plan+="1- شغل الغسالة مرة واحدة مليانة\n2- اغسل بمية باردة\n3- متشغلهاش مرتين في اليوم\n"}
-else{plan+="1- ركز على "+b+" لانه اكتر جهاز بيستهلك\n2- قلل ساعات تشغيله ساعة واحدة\n3- اطفيه وانت مش بتستخدمه\n"}
-plan+="5- غير كل اللمبات العادية لـ LED\n6- افصل كل الشواحن بعد الشحن\n\n";
-plan+="لو عملت كده، هتدفع "+last.after+" جنيه بدل "+last.cost+" جنيه.";
+plan+="========================\n\n";
+last.list.forEach((d,i)=>{
+plan+="🔹 "+(i+1)+"- "+d.name+" - "+d.watt+" وات × "+d.qty+" × "+d.hours+" ساعة = "+d.energy.toFixed(2)+" ك.و.س\n";
+plan+="   بيستهلك في الشهر: "+(d.energy*30).toFixed(2)+" ك.و.س\n";
+plan+="   اعمل كده:\n";
+if(d.name.includes("تكييف")){
+plan+="   1- اظبط التكييف على 24 مش 18\n";
+plan+="   2- نظف الفلتر كل اسبوعين\n";
+plan+="   3- اقفل الباب والشباك وانت مشغله\n";
+plan+="   4- قلل تشغيله من "+d.hours+" ساعة لـ "+Math.max(d.hours-1,1)+" ساعة، هتوفر "+(d.watt*d.qty*30/1000*Number(last.avg||2.5)).toFixed(2)+" جنيه\n";
+}
+else if(d.name.includes("سخان")){
+plan+="   1- شغل السخان ساعة واحدة بس قبل الحمام\n";
+plan+="   2- اطفيه بعدها على طول\n";
+plan+="   3- وطي الترموستات\n";
+plan+="   4- متسيبوش شغال "+d.hours+" ساعة كلها\n";
+}
+else if(d.name.includes("تلفزيون")){
+plan+="   1- اطفي التلفزيون وانت مش بتتفرج\n";
+plan+="   2- متسيبوش على وضع الاستعداد (اللمبة الحمرا)\n";
+plan+="   3- افصل الفيشة بعد "+d.hours+" ساعة\n";
+plan+="   4- وطي الاضاءة شوية\n";
+}
+else if(d.name.includes("لمبة")){
+plan+="   1- غير اللمبة العادية لـ LED\n";
+plan+="   2- اطفي النور وانت طالع\n";
+plan+="   3- استخدم نور الشمس بالنهار\n";
+plan+="   4- الليد 12 وات بس بدل 60 وات\n";
+}
+else if(d.name.includes("ثلاجة")||d.name.includes("ديب")){
+plan+="   1- متفتحش الثلاجة كتير\n";
+plan+="   2- متحطش أكل سخن جواها\n";
+plan+="   3- سيب فراغ وراها للتهوية\n";
+plan+="   4- اظبطها على النص\n";
+}
+else if(d.name.includes("غسالة")){
+plan+="   1- شغلها مرة واحدة مليانة\n";
+plan+="   2- اغسل بمية باردة\n";
+plan+="   3- متشغلهاش مرتين في اليوم\n";
+plan+="   4- افصلها بعد ما تخلص\n";
+}
+else if(d.name.includes("مروحة")){
+plan+="   1- شغل المروحة بدل التكييف لما الجو حلو\n";
+plan+="   2- نظف الريش\n";
+plan+="   3- اطفيها وانت طالع\n";
+plan+="   4- شغلها على سرعة متوسطة\n";
+}
+else if(d.name.includes("غلاية")){
+plan+="   1- اغلي على قد الكوباية بس\n";
+plan+="   2- متملهاش كلها\n";
+plan+="   3- افصلها بعد ما تغلي\n";
+plan+="   4- نظفها من التكلس\n";
+}
+else if(d.name.includes("ميكروويف")){
+plan+="   1- سخن على قد أكلك بس\n";
+plan+="   2- افصل الفيشة بعد ما تخلص\n";
+plan+="   3- متسيبوش على الاستعداد\n";
+plan+="   4- استخدمه بدل الفرن\n";
+}
+else if(d.name.includes("مكواة")){
+plan+="   1- اكوي مرة واحدة كل الهدوم\n";
+plan+="   2- افصلها وانت مش بتكوي\n";
+plan+="   3- متسيبهاش شغالة على الفاضي\n";
+plan+="   4- اكوي اللي محتاج حرارة عالية الأول\n";
+}
+else{
+plan+="   1- قلل تشغيله من "+d.hours+" ساعة لـ "+Math.max(d.hours-1,1)+" ساعة\n";
+plan+="   2- اطفيه وانت مش بتستخدمه\n";
+plan+="   3- افصل الفيشة بعد ما تخلص\n";
+plan+="   4- متسيبوش على وضع الاستعداد\n";
+}
+plan+="\n";
+});
+plan+="========================\nلو عملت كل ده، هتدفع "+last.after+" جنيه بدل "+last.cost+" جنيه.";
 document.getElementById("savePlanText").textContent=plan;
 document.getElementById("savePlan").hidden=false;
 document.getElementById("savePlan").scrollIntoView({behavior:"smooth"});
@@ -161,45 +242,72 @@ document.getElementById("savePlan").scrollIntoView({behavior:"smooth"});
 function quickAsk(q){document.getElementById("question").value=q;askAI()}
 function localAnswer(q){
 let t="";
-if(last){t+="📊 بيتك: "+last.monthly+" ك.و.س | بتدفع "+last.cost+" جنيه | أكتر جهاز: "+last.biggest+"\n\n"}
+if(last && last.list){
+t+="📊 أجهزتك اللي انت كاتبها:\n";
+last.list.forEach(d=>{
+t+="• "+d.name+" - "+d.watt+" وات × "+d.qty+" × "+d.hours+" ساعة = "+d.energy.toFixed(2)+" ك.و.س في اليوم\n";
+});
+t+="\nشريحتك: "+last.slab+"\nبتدفع: "+last.cost+" جنيه | هتوفر: "+last.saving+" جنيه | بعد التوفير: "+last.after+" جنيه\n\n";
+}
 let l=q.toLowerCase();
 let devicesInfo={
-"تكييف":"❄️ التكييف 1.5 حصان = 1500 وات.\nيعني لو شغلته 5 ساعات = 7.5 ك.و.س في اليوم.\nعشان توفر: اظبطه على 24، نظف الفلتر، اقفل الباب والشباك.",
-"سخان":"🔥 السخان الكهربائي = 2000 وات، ده من أكتر الأجهزة اللي بتسحب كهربا.\nلو شغلته ساعتين = 4 ك.و.س.\nعشان توفر: شغله ساعة واحدة بس قبل الحمام واطفيه.\nالسخان الغاز: بيستهلك غاز مش كهربا، وطي الشعلة ومتسيبش المية مفتوحة.",
-"ثلاجة":"🧊 الثلاجة = 200 وات، بس شغالة 24 ساعة.\nيعني بتسحب حوالي 4.8 ك.و.س في اليوم.\nعشان توفر: متفتحهاش كتير، متحطش أكل سخن، سيب فراغ وراها.",
-"ديب":"🧊 الديب فريزر = 350 وات، شغال طول اليوم.\nعشان توفر: متفتحوش كتير، اظبطه على النص.",
-"غسالة":"👕 الغسالة = 500 وات.\nعشان توفر: شغلها مرة واحدة مليانة، اغسل بمية باردة.",
-"لمبة":"💡 اللمبة العادية = 60 وات، الليد = 12 وات بس.\nيعني الليد بتوفر 80%.\n7 لمبات عادية = 63 جنيه، الليد = 12 جنيه.",
-"مروحة":"🌀 المروحة = 75 وات بس، يعني أوفر بكتير من التكييف.\nلو الجو حلو، شغل مروحة بدل التكييف.",
-"تلفزيون":"📺 التلفزيون = 100 وات.\nعشان توفر: اطفيه وانت مش بتتفرج، ومتسيبوش على وضع الاستعداد.",
-"ميكروويف":"🍲 الميكروويف = 1200 وات، بس بيشتغل دقايق.\nعشان توفر: سخن على قد أكلك بس.",
-"غلاية":"🫖 الغلاية = 1800 وات، بتسحب كتير.\nعشان توفر: اغلي على قد الكوباية اللي هتشربها بس، مش الغلاية كلها.",
-"مكواة":"👔 المكواة = 1000 وات.\nعشان توفر: اكوي مرة واحدة كل الهدوم، مش كل شوية حتة.",
+"تكييف":"❄️ التكييف 1.5 حصان = 1500 وات.",
+"سخان":"🔥 السخان الكهربائي = 2000 وات، ده من أكتر الأجهزة اللي بتسحب كهربا.",
+"ثلاجة":"🧊 الثلاجة = 200 وات، بس شغالة 24 ساعة.",
+"ديب":"🧊 الديب فريزر = 350 وات، شغال طول اليوم.",
+"غسالة":"👕 الغسالة = 500 وات.",
+"لمبة":"💡 اللمبة العادية = 60 وات، الليد = 12 وات بس. يعني الليد بتوفر 80%.",
+"مروحة":"🌀 المروحة = 75 وات بس، يعني أوفر بكتير من التكييف.",
+"تلفزيون":"📺 التلفزيون = 100 وات.",
+"ميكروويف":"🍲 الميكروويف = 1200 وات، بس بيشتغل دقايق.",
+"غلاية":"🫖 الغلاية = 1800 وات، بتسحب كتير.",
+"مكواة":"👔 المكواة = 1000 وات.",
 "كمبيوتر":"🖥️ الكمبيوتر = 300 وات، اللابتوب = 65 وات بس، يعني اللابتوب أوفر بكتير.",
-"بلايستيشن":"🎮 البلايستيشن = 150 وات.\nعشان توفر: اطفيه خالص بعد اللعب، متسيبوش شغال.",
-"شاحن":"📱 الشاحن = 15 وات بس، بس بيسحب كهربا حتى لو مش بيشحن.\nعشان توفر: افصله بعد الشحن.",
-"راوتر":"📶 الراوتر = 10 وات بس، بس شغال 24 ساعة.\nعشان توفر: افصله وانت نايم."
+"بلايستيشن":"🎮 البلايستيشن = 150 وات.",
+"شاحن":"📱 الشاحن = 15 وات بس، بس بيسحب كهربا حتى لو مش بيشحن.",
+"راوتر":"📶 الراوتر = 10 وات بس، بس شغال 24 ساعة."
 };
 for(let k in devicesInfo){
-if(l.includes(k)){t+=devicesInfo[k]+"\n\n";t+="💰 لو عملت كده هتوفر "+(last?last.saving:"حوالي 100")+" جنيه وهتدفع "+(last?last.after:"أقل")+" بدل "+(last?last.cost:"فاتورتك")+".";return t;}
+if(l.includes(k)){
+let found = last ? last.list.find(d=>d.name.includes(k)) : null;
+if(found){
+t+=devicesInfo[k]+"\n";
+t+="انت كاتبه: "+found.watt+" وات × "+found.qty+" × "+found.hours+" ساعة = "+found.energy.toFixed(2)+" ك.و.س في اليوم.\n";
+t+="يعني في الشهر: "+(found.energy*30).toFixed(2)+" ك.و.س.\n";
+t+="لو قللت ساعة واحدة بس، هتوفر "+(found.watt*found.qty*30/1000*Number(last.avg||2.5)).toFixed(2)+" جنيه في الشهر.\n";
+if(k==="تكييف") t+="عشان توفر: اظبطه على 24، نظف الفلتر، اقفل الباب والشباك.";
+else if(k==="سخان") t+="عشان توفر: شغله ساعة واحدة بس قبل الحمام واطفيه. السخان الغاز: بيستهلك غاز مش كهربا.";
+else if(k==="تلفزيون") t+="عشان توفر: اطفيه وانت مش بتتفرج، ومتسيبوش على وضع الاستعداد، وافصل الفيشة بعد ما تخلص.";
+else if(k==="لمبة") t+="عشان توفر: غير كل اللمبات العادية لـ LED، واطفي النور وانت طالع.";
+else t+="عشان توفر: قلل ساعات تشغيله ساعة، واطفيه وانت مش بتستخدمه.";
+}
+else{
+t+=devicesInfo[k]+"\nعشان توفر: قلل ساعات تشغيله، واطفيه وانت مش بتستخدمه.";
+}
+t+="\n\n💰 هتوفر "+(last?last.saving:"حوالي 100")+" جنيه وهتدفع "+(last?last.after:"أقل")+" بدل "+(last?last.cost:"فاتورتك")+".";
+return t;}
 }
 if(l.includes("فاتورة")||l.includes("اوفر")||l.includes("توفير")||l.includes("900")||l.includes("غالي")||l.includes("عالية")){
 t+="💰 عشان توفر في فاتورتك اعمل كده بالترتيب:\n1- غير كل اللمبات العادية لـ LED\n2- التكييف على 24 ونظف الفلتر\n3- السخان ساعة واحدة بس واطفيه\n4- افصل كل الشواحن بعد الشحن\n5- ركز على "+(last?last.biggest:"التكييف")+" لانه أكتر جهاز بيستهلك\nلو عملت كده هتدفع "+(last?last.after:"أقل")+" بدل "+(last?last.cost:"فاتورتك")+"، يعني هتوفر "+(last?last.saving:"200")+" جنيه.";
 return t;
 }
 if(l.includes("يعني ايه")||l.includes("ايه هو")||l.includes("اشرح")||l.includes("كهربا")||l.includes("كيلو")||l.includes("وات")){
-t+="⚡ الكهربا ببساطة:\nالوات = قوة الجهاز.\nالكيلووات ساعة = الوات × ساعات التشغيل ÷ 1000.\nمثال: تكييف 1500 وات × 5 ساعات ÷ 1000 = 7.5 ك.و.س في اليوم.\nوكل ك.و.س سعره حوالي 2.5 جنيه.\nاسألني عن أي جهاز وهشرحهولك: تكييف، سخان، ثلاجة، غسالة، لمبة.";
+t+="⚡ الكهربا ببساطة:\nالوات = قوة الجهاز.\nالكيلووات ساعة = الوات × ساعات التشغيل ÷ 1000.\nمثال: تكييف 1500 وات × 5 ساعات ÷ 1000 = 7.5 ك.و.س في اليوم.\nوالسعر بيتحسب بالشرائح، مش سعر ثابت. كل ما تستهلك أكتر، الشريحة بتغلى.\nاسألني عن أي جهاز وهشرحهولك: تكييف، سخان، ثلاجة، غسالة، لمبة.";
 return t;
 }
-t+="💡 سؤالك حلو!\nبس انا متخصص في الكهربا والتوفير.\nاسألني عن أي جهاز في بيتك: تكييف، سخان، ثلاجة، غسالة، لمبة، تلفزيون، وانا هشرحهولك بيستهلك كام، وتعمل ايه عشان توفر فيه.\nمثال: قولي 'اشرحلي التكييف' أو 'فاتورتي عالية اعمل ايه؟'";
+t+="💡 سؤالك حلو!\nبس انا متخصص في الكهربا والتوفير.\nاسألني عن أي جهاز في بيتك: تكييف، سخان، ثلاجة، غسالة، لمبة، تلفزيون، وانا هشرحهولك بيستهلك كام على حسب ساعاتك، وتعمل ايه عشان توفر فيه.\nمثال: قولي 'اشرحلي التكييف' أو 'فاتورتي عالية اعمل ايه؟'";
 return t;
 }
 async function askAI(){
 let q=document.getElementById("question").value.trim();if(!q){alert("اكتب سؤالك");return}
 let ansEl=document.getElementById("aiAnswer");let srcEl=document.getElementById("aiSource");
 document.getElementById("aiResult").hidden=false;ansEl.textContent="⏳ مساعد التوفير بيفكر...";srcEl.textContent="";
-let context="انت مساعد توفير كهربا في مصر، اسمك مساعد التوفير والنصائح. مهمتك: تشرح الأجهزة الكهربائية ببساطة، وتقول للمستخدم يعمل ايه عشان يوفر. رد بالعامية المصرية البسيطة زي صاحبك. لو سألك عن أي جهاز، اشرحه: هو كام وات، بيستهلك كام في اليوم، وازاي توفر فيه. لو سألك سؤال عام، جاوبه وبعدين اربطه بالتوفير في الكهربا. ممنوع تتكلم عن عربيات أو أي حاجة مش كهربا بيت. في الآخر اكتب هتوفر كام جنيه وهتدفع كام بعد التوفير.";
-if(last){context+=" بيت المستخدم: بيدفع "+last.cost+" جنيه، استهلاك "+last.monthly+" ك.و.س، اكتر جهاز "+last.biggest+"، هيوفر "+last.saving+" جنيه، هيدفع بعد التوفير "+last.after+" جنيه. استخدم الارقام دي. "}
+let context="انت مساعد توفير كهربا في مصر، اسمك مساعد التوفير والنصائح. مهمتك: تشرح الأجهزة الكهربائية ببساطة، وتقول للمستخدم يعمل ايه عشان يوفر. رد بالعامية المصرية البسيطة. لازم ترد على حسب الأجهزة والساعات اللي المستخدم كاتبها بالظبط، مش رد ثابت. لو المستخدم كاتب تلفزيون 8 ساعات، احسبله 100 وات × 8 = 0.8 ك.و.س وقوله يعمل ايه في الساعات دي. الكهربا في مصر بتتحسب بالشرائح - أغسطس 2026: 0-50 بـ 0.68، 51-100 بـ 0.87، 101-200 بـ 1.06 من الصفر، 201-350 بـ 1.74، 351-650 بـ 2.18، 651-1000 بـ 2.35 من الصفر، أكتر من 1000 بـ 2.89 من غير دعم. لو سألك عن أي جهاز، اشرحه: هو كام وات، بيستهلك كام في اليوم على حسب ساعات المستخدم، وازاي توفر فيه. في الآخر اكتب هتوفر كام جنيه وهتدفع كام بعد التوفير.";
+if(last && last.list){
+context+=" أجهزة المستخدم: ";
+last.list.forEach(d=>{context+=d.name+" "+d.watt+" وات، عدد "+d.qty+"، شغال "+d.hours+" ساعة، بيستهلك "+d.energy.toFixed(2)+" ك.و.س. ";});
+context+=" بيدفع "+last.cost+" جنيه، شريحته "+last.slab+"، هيوفر "+last.saving+" جنيه، هيدفع بعد التوفير "+last.after+" جنيه. استخدم الارقام دي بالظبط. ";
+}
 if(SITE_KEY && SITE_KEY.startsWith("sk-or") && !SITE_KEY.includes("حط_")){
   for(let model of OPENROUTER_MODELS){
     try{
